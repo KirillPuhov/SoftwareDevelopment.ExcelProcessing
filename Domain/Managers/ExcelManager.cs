@@ -12,12 +12,9 @@ namespace Domain.Managers
         #region Import excel tables
         private DataTableCollection _tableCollection = null;
 
-        public DataTable Import(string path)
+        public DataTable Import(string filePath)
         {
-            if (string.IsNullOrWhiteSpace(path))
-            {
-                throw new Exception("ImportOfExcel: Null or empty file path!\n");
-            }
+            var path = string.IsNullOrWhiteSpace(filePath) ? throw new Exception("ImportOfExcel: Null or empty file path!\n") : filePath;
 
             try
             {
@@ -62,17 +59,13 @@ namespace Domain.Managers
                 foreach (DataColumn _column in _table.Columns)
                 {
                     if (_column.DataType == typeof(int) || _column.DataType == typeof(double))
-                    {
                         break;
-                    }
-                    else if (_column.DataType == typeof(DateTime))
-                    {
+
+                    if (_column.DataType == typeof(DateTime))
                         break;
-                    }   
-                    else if(_column.DataType != typeof(string))
-                    {
+
+                    if(_column.DataType != typeof(string))
                         _column.DataType = typeof(string);
-                    }
                 }
             }
 
@@ -97,28 +90,21 @@ namespace Domain.Managers
             }
             catch (Exception ex)
             {
-                throw new Exception("ExportToExcel: " + ex);
+                return false;
+                throw new Exception("ExportToExcel: " + ex.Message);
             }
         }
 
         private bool TryExport(DataTable table, string filePath)
         {
-            try
+            FileInfo newFile = new FileInfo(filePath);
+            using (ExcelPackage pck = new ExcelPackage(newFile))
             {
-                FileInfo newFile = new FileInfo(filePath);
-                using (ExcelPackage pck = new ExcelPackage(newFile))
-                {
-                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Accounts");
-                    ws.Cells["A1"].LoadFromDataTable(table, true);
-                    pck.Save();
-                }
-                return true;
+                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("Accounts");
+                ws.Cells["A1"].LoadFromDataTable(table, true);
+                pck.Save();
             }
-            catch (Exception ex)
-            {
-                return false;
-                throw new Exception("ExportToExcel: " + ex.Message);
-            }
+            return true;
         }
         #endregion
     }

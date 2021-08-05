@@ -84,7 +84,6 @@ namespace AppUX
             if (e.PropertyType == typeof(DateTime))
                 (e.Column as DataGridTextColumn).Binding.StringFormat = "dd.MM.yyyy";
         }
- 
         #endregion
 
         #region Filter Triggers
@@ -150,6 +149,6 @@ namespace AppUX
         {
             _manager.DoubleAnimationHide(1, 0, 0.3, DialogForCreate);
         }
-        #endregion 
+        #endregion
     }
 }

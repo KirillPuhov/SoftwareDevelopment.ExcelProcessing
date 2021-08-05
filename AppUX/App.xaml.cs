@@ -1,19 +1,20 @@
-﻿using System.Windows;
+﻿using System;
+using System.Runtime.ExceptionServices;
+using System.Windows;
 
 namespace AppUX
 {
     public partial class App : Application
     {
+        
         public App()
         {
-            this.Dispatcher.UnhandledException += OnDispatcherUnhandledException;
+            AppDomain.CurrentDomain.FirstChanceException += new EventHandler<System.Runtime.ExceptionServices.FirstChanceExceptionEventArgs>(CurrentDomain_FirstChanceException);
         }
 
-        void OnDispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e)
+        public void CurrentDomain_FirstChanceException(object sender, FirstChanceExceptionEventArgs e)
         {
-            string errorMessage = string.Format("An unhandled exception occurred: {0}", e.Exception.Message);
-            MessageBox.Show(errorMessage, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-            e.Handled = true;
+            Dispatcher.BeginInvoke(new Action(() => MessageBox.Show("Error Occurred \n\r" + e.Exception.Message + "\n\r" + e.Exception.StackTrace, "ERROR", MessageBoxButton.OK, MessageBoxImage.Error)));
         }
     }
 }

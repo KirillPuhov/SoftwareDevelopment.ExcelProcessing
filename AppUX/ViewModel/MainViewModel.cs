@@ -110,13 +110,12 @@ namespace AppUX.ViewModel
                     {
                         OpenFileDialog _fileDialog = new OpenFileDialog();
 
-                        if (_fileDialog.ShowDialog() == true)
-                            FilePath = _fileDialog.FileName;
-
-                        if (string.IsNullOrWhiteSpace(FilePath) == true)
-                        {
+                        if (_fileDialog.ShowDialog() is false)
                             return;
-                        }
+                        FilePath = _fileDialog.FileName;
+
+                        if (string.IsNullOrWhiteSpace(FilePath) is true)
+                            return;
 
                         ExcelTable = _excel.GetTable(FilePath);
 
@@ -139,27 +138,19 @@ namespace AppUX.ViewModel
                     {
                         try
                         {
-                            DataView _dataView = new DataView();
-                            DataTable _data = new DataTable();
-                            SaveFileDialog _saveFileDialog = new SaveFileDialog();
+                            var _data = new DataTable();
+                            var _dataView = new DataView();  
+                            var _saveFileDialog = new SaveFileDialog();
+
+
                             string _filePath = null;
-
                             _saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx|Excel file (*.xls)|*.xls";
-                            if (_saveFileDialog.ShowDialog() == true)
-                                _filePath = string.Empty;
-
+                            if (_saveFileDialog.ShowDialog() is false)
+                                return;
                             _filePath = _saveFileDialog.FileName;
 
-                            if (string.IsNullOrWhiteSpace(_filePath) == true)
-                            {
+                            if (ExcelTable is null)
                                 return;
-                            }
-
-                            if (ExcelTable == null)
-                            {
-                                MessageBox.Show("Info: Table cannot be empty", "Table", MessageBoxButton.OK, MessageBoxImage.Information);
-                                return;
-                            }
 
                             _dataView = ExcelTable.DefaultView;
 
@@ -173,9 +164,9 @@ namespace AppUX.ViewModel
                             else
                                 FilePath = "Файл не сохранен";
                         }
-                        catch (Exception ex)
+                        catch (Exception)
                         {
-                            MessageBox.Show("Error: " + ex, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                            throw new Exception();
                         }
                     }));
             }
@@ -189,9 +180,16 @@ namespace AppUX.ViewModel
                 return _gridClearCommand ??
                     (_gridClearCommand = new RelayCommand(obj =>
                     {
-                        Filter = string.Empty;
                         ExcelTable = null;
-                        FilePath = string.Empty;
+
+                        SelectedItem = null;
+
+                        Filter = null;
+
+                        Format = null;
+
+                        FilePath = null;
+
                         _cmbContent.Clear();
                     }));
             }
@@ -209,13 +207,13 @@ namespace AppUX.ViewModel
                     {
                         var _layoutPanel = (Grid)obj;
 
-                        ClearChildrenInPanel(_layoutPanel);
+                        RemoveChildrenInPanel(_layoutPanel);
                         AddChildrenInPanel(_layoutPanel, Convert.ToInt32(ColumnCount));
                     }));
             }
         }
 
-        private void ClearChildrenInPanel(Grid _panel)
+        private void RemoveChildrenInPanel(Grid _panel)
         {
             for (int j = 0; j < _panel.Children.Count; j++)
             {
@@ -232,13 +230,21 @@ namespace AppUX.ViewModel
             for (int i = 0; i < _columnCount; i++)
             {
                 TextBox myTextBox = new TextBox();
+
                 myTextBox.Height = 17;
+
                 myTextBox.SetValue(Grid.RowProperty, 1);
+
                 myTextBox.TextWrapping = TextWrapping.Wrap;
+
                 myTextBox.Name = "Column" + (i + 1);
+
                 myTextBox.Text = myTextBox.Name;
+
                 myTextBox.VerticalAlignment = VerticalAlignment.Top;
+
                 myTextBox.Margin = new Thickness(0, 25 * i, 0, 0);
+
                 _panel.Children.Add(myTextBox);
             }
         }
@@ -303,34 +309,16 @@ namespace AppUX.ViewModel
                         {
                             DataView _dataView;
 
-                            if (ExcelTable != null)
-                            {
-                                _dataView = _table.ItemsSource as DataView;
-                            }
-                            else
-                            {
+                            _dataView = _table.ItemsSource as DataView ?? null;
+
+                            if (_dataView is null)
                                 return;
-                            }
 
-                            if (!string.IsNullOrEmpty(Filter) && !string.IsNullOrEmpty(SelectedItem))
-                            {
-                                try
-                                {
-                                    string _format = string.Format("[{0}] = '{1}'", SelectedItem, Filter);
+                            string _format = string.IsNullOrEmpty(Filter) 
+                                          && string.IsNullOrEmpty(SelectedItem) ? null : string.Format("[{0}] = '{1}'", SelectedItem, Filter);
 
-                                    _dataView.RowFilter = _format;
-                                    Format = _format;
-                                }
-                                catch (Exception)
-                                {
-                                    return;
-                                }
-                            }
-                            else
-                            {
-                                _dataView.RowFilter = null;
-                                Format = null;
-                            }
+                            _dataView.RowFilter = _format;
+                            Format = _format;
                         }
                         catch (Exception ex)
                         {
@@ -349,6 +337,7 @@ namespace AppUX.ViewModel
                     (_filterClearCommand = new RelayCommand(obj =>
                     {
                         SelectedItem = string.Empty;
+
                         ((TextBox)obj).Text = string.Empty;
                     }));
             }
