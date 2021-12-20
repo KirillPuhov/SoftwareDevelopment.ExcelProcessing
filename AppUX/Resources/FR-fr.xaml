@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="apply">Appliquer</system:String>
+    <system:String x:Key="file">Fichier</system:String>
+    <system:String x:Key="filter">Filtre</system:String>
+    <system:String x:Key="sort">Tri</system:String>
+    <system:String x:Key="open">Ouvert</system:String>
+    <system:String x:Key="create">Créer</system:String>
+    <system:String x:Key="close">Proche</system:String>
+    <system:String x:Key="save">Enregistrer</system:String>
+    <system:String x:Key="column">Сolonne</system:String>
+    <system:String x:Key="clear">Dégager</system:String>
+    <system:String x:Key="back">Arrière</system:String>
+    <system:String x:Key="tableName">Nom de la table</system:String>
+    <system:String x:Key="columnCount">Nombre de colonnes</system:String>
+    <system:String x:Key="settings">Paramètres</system:String>
+    <system:String x:Key="colorTheme">Сouleur du thème</system:String>
+    <system:String x:Key="language">Langue</system:String>
+    <system:String x:Key="fileSettings">Paramètres de fichier</system:String>
+    <system:String x:Key="about">À propos</system:String>
+    <system:String x:Key="theme">Thème</system:String>
+    <system:String x:Key="filePath">Chemin du fichier</system:String>
+    <system:String x:Key="fileType">Type de fichier</system:String>
+    <system:String x:Key="default">Défaut</system:String>
+    <system:String x:Key="packages">Paquets</system:String>
+    <system:String x:Key="developer">Développeur:</system:String>
+    <system:String x:Key="ascending">Ascendant</system:String>
+    <system:String x:Key="descending">Descendant</system:String>
+    <system:String x:Key="gratitude">Merci d'avoir utilisé notre programme!</system:String>
+
+</ResourceDictionary>

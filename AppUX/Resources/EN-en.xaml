@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="apply">Apply</system:String>
+    <system:String x:Key="file">File</system:String>
+    <system:String x:Key="filter">Filter</system:String>
+    <system:String x:Key="sort">Sorting</system:String>
+    <system:String x:Key="open">Open</system:String>
+    <system:String x:Key="create">Create</system:String>
+    <system:String x:Key="close">Close</system:String>
+    <system:String x:Key="save">Save</system:String>
+    <system:String x:Key="column">Column</system:String>
+    <system:String x:Key="clear">Clear</system:String>
+    <system:String x:Key="back">Back</system:String>
+    <system:String x:Key="tableName">Table name</system:String>
+    <system:String x:Key="columnCount">Column count</system:String>
+    <system:String x:Key="settings">Settings</system:String>
+    <system:String x:Key="colorTheme">Color Theme</system:String>
+    <system:String x:Key="language">Language</system:String>
+    <system:String x:Key="fileSettings">File settings</system:String>
+    <system:String x:Key="about">About</system:String>
+    <system:String x:Key="theme">Theme</system:String>
+    <system:String x:Key="filePath">File path</system:String>
+    <system:String x:Key="fileType">File type</system:String>
+    <system:String x:Key="default">Default</system:String>
+    <system:String x:Key="packages">Packages</system:String>
+    <system:String x:Key="developer">Developer:</system:String>
+    <system:String x:Key="ascending">Аscending</system:String>
+    <system:String x:Key="descending">Descending</system:String>
+    <system:String x:Key="gratitude">Thanks for using our program!</system:String>
+
+</ResourceDictionary>

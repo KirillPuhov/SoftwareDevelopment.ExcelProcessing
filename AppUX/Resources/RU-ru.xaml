@@ -1,0 +1,33 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:system="clr-namespace:System;assembly=mscorlib">
+
+    <system:String x:Key="apply">Применить</system:String>
+    <system:String x:Key="file">Файл</system:String>
+    <system:String x:Key="filter">Фильтр</system:String>
+    <system:String x:Key="sort">Сортировка</system:String>
+    <system:String x:Key="open">Открыть</system:String>
+    <system:String x:Key="create">Создать</system:String>
+    <system:String x:Key="close">Закрыть</system:String>
+    <system:String x:Key="save">Сохранить</system:String>
+    <system:String x:Key="column">Столбец</system:String>
+    <system:String x:Key="clear">Очистить</system:String>
+    <system:String x:Key="back">Назад</system:String>
+    <system:String x:Key="tableName">Название таблицы</system:String>
+    <system:String x:Key="columnCount">Кол-во столбцов</system:String>
+    <system:String x:Key="settings">Настройки</system:String>
+    <system:String x:Key="colorTheme">Цветовая тема</system:String>
+    <system:String x:Key="language">Язык</system:String>
+    <system:String x:Key="fileSettings">Натройки файлов</system:String>
+    <system:String x:Key="about">About</system:String>
+    <system:String x:Key="theme">Тема</system:String>
+    <system:String x:Key="filePath">Путь файла</system:String>
+    <system:String x:Key="fileType">Тип файла</system:String>
+    <system:String x:Key="default">Стандарт</system:String>
+    <system:String x:Key="packages">Пакеты</system:String>
+    <system:String x:Key="developer">Разработчик:</system:String>
+    <system:String x:Key="ascending">По возрастанию</system:String>
+    <system:String x:Key="descending">По убыванию</system:String>
+    <system:String x:Key="gratitude">Спасибо за использование нашей программы!</system:String>
+
+</ResourceDictionary>

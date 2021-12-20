@@ -1,25 +1,53 @@
-﻿using Domain.Controllers;
+﻿using AppUX.Constants;
+using Domain.Controllers;
 using Domain.Managers;
 using Microsoft.Win32;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
 using System.Runtime.CompilerServices;
-using System.Windows;
-using System.Windows.Controls;
 
 namespace AppUX.ViewModel
 {
     public class MainViewModel : INotifyPropertyChanged
     {
-        private ExcelController _excel = new ExcelController(new ExcelManager(), new DataTableHelper());
+        #region Fields
 
-        public ObservableCollection<string> _cmbContent { get; set; }
+        private ExportController _export;
+        private readonly ExcelController _excel = new ExcelController(new ImportTableManager());
+        private readonly SettingsLoader _loader = SettingsLoader.GetInstance();
+
+        #endregion
+
+        #region Properties
+
+        public ObservableCollection<string> ComboBoxContent { get; set; }
         public MainViewModel()
         {
-            _cmbContent = new ObservableCollection<string>();
+            ComboBoxContent = new ObservableCollection<string>();
+        }
+
+        private bool[] _modeArray = new bool[] { true, false };
+        public bool[] ModeArray
+        {
+            get 
+            { 
+                return _modeArray; 
+            }
+            set
+            {
+                _modeArray = value;
+                OnPropertyChanged("ModeArray");
+            }
+        }
+
+        public int SelectedMode
+        {
+            get
+            {
+                return Array.IndexOf(_modeArray, true);
+            }
         }
 
         private DataTable _excelTable;
@@ -30,6 +58,17 @@ namespace AppUX.ViewModel
             {
                 _excelTable = value;
                 OnPropertyChanged("ExcelTable");
+            }
+        }
+
+        private DataView TableView
+        {
+            get
+            {
+                if (ExcelTable !=null)
+                    return ExcelTable.DefaultView;
+
+                return null;
             }
         }
 
@@ -77,6 +116,17 @@ namespace AppUX.ViewModel
             }
         }
 
+        private string _sorting;
+        public string Sorting
+        {
+            get { return _sorting; }
+            set
+            {
+                _sorting = value;
+                OnPropertyChanged("Sorting");
+            }
+        }
+
         private string _filter;
         public string Filter
         {
@@ -99,7 +149,21 @@ namespace AppUX.ViewModel
             }
         }
 
-        #region Сommands for opening and saving tables
+        private string _selectedItem2;
+        public string SelectedItem2
+        {
+            get { return _selectedItem2; }
+            set
+            {
+                _selectedItem2 = value;
+                OnPropertyChanged("SelectedItem2");
+            }
+        }
+
+        #endregion
+
+        #region OpenCommand and SaveCommand
+
         private RelayCommand _openCommand;
         public RelayCommand OpenCommand
         {
@@ -119,10 +183,10 @@ namespace AppUX.ViewModel
 
                         ExcelTable = _excel.GetTable(FilePath);
 
-                        _cmbContent.Clear();
+                        ComboBoxContent.Clear();
                         for (int i = 0; i < ExcelTable.Columns.Count; i++)
                         {
-                            _cmbContent.Add(Convert.ToString(ExcelTable.Columns[i]));
+                            ComboBoxContent.Add(Convert.ToString(ExcelTable.Columns[i]));
                         }
                     }));
             }
@@ -134,41 +198,47 @@ namespace AppUX.ViewModel
             get
             {
                 return _saveCommand ??
-                    (_saveCommand = new RelayCommand(obj => 
-                    {
-                        try
-                        {
-                            var _data = new DataTable();
-                            var _dataView = new DataView();  
-                            var _saveFileDialog = new SaveFileDialog();
+                    (_saveCommand = new RelayCommand(TrySave));
+            }
+        }
 
+        private void TrySave(object obj)
+        {
+            try
+            {
+                string _fileName = null;
 
-                            string _filePath = null;
-                            _saveFileDialog.Filter = "Excel file (*.xlsx)|*.xlsx|Excel file (*.xls)|*.xls";
-                            if (_saveFileDialog.ShowDialog() is false)
-                                return;
-                            _filePath = _saveFileDialog.FileName;
+                switch (_loader.UserSettings.DefaultSaveFile)
+                {
+                    case AppConstants.ExcelFile:
+                        _export = new ExportController(new ExcelManager());
+                        _fileName = AppConstants.ExcelFile + "_file.xlsx";
+                        break;
 
-                            if (ExcelTable is null)
-                                return;
+                    case AppConstants.WordFile:
+                        _export = new ExportController(new WordManager());
+                        _fileName = AppConstants.WordFile + "_file.docx";
+                        break;
 
-                            _dataView = ExcelTable.DefaultView;
+                    case AppConstants.TextFile:
+                        _export = new ExportController(new TextManager());
+                        _fileName = AppConstants.TextFile + "_file.txt";
+                        break;
+                }
 
-                            _dataView.RowFilter = Format;
-                            _data = _dataView.ToTable();
+                string _filePath = _loader.UserSettings.DefaultSavePath + "\\" + _fileName;
 
-                            bool _result = _excel.SetTable(_data, _filePath);
+                if (ExcelTable is null)
+                    return;
 
-                            if (_result == true)
-                                FilePath = "Готово";
-                            else
-                                FilePath = "Файл не сохранен";
-                        }
-                        catch (Exception)
-                        {
-                            throw new Exception();
-                        }
-                    }));
+                var _data = TableView.ToTable();
+                bool _result = _export.SetTable(_data, _filePath);
+
+                FilePath = "Готово";
+            }
+            catch (Exception)
+            {
+                throw new Exception();
             }
         }
 
@@ -180,169 +250,101 @@ namespace AppUX.ViewModel
                 return _gridClearCommand ??
                     (_gridClearCommand = new RelayCommand(obj =>
                     {
-                        ExcelTable = null;
-
+                        ExcelTable   = null;
                         SelectedItem = null;
-
-                        Filter = null;
-
-                        Format = null;
-
-                        FilePath = null;
-
-                        _cmbContent.Clear();
+                        Filter       = null;
+                        Format       = null;
+                        FilePath     = null;
+                        ComboBoxContent.Clear();
                     }));
             }
         }
+
         #endregion
 
-        #region Сommands for creating new tables
-        private RelayCommand _nextCommand;
-        public RelayCommand NextCommand
-        {
-            get
-            {
-                return _nextCommand ??
-                    (_nextCommand = new RelayCommand(obj =>
-                    {
-                        var _layoutPanel = (Grid)obj;
+        #region FilterCommand and SortTableCommand
 
-                        RemoveChildrenInPanel(_layoutPanel);
-                        AddChildrenInPanel(_layoutPanel, Convert.ToInt32(ColumnCount));
-                    }));
-            }
-        }
-
-        private void RemoveChildrenInPanel(Grid _panel)
-        {
-            for (int j = 0; j < _panel.Children.Count; j++)
-            {
-                if (_panel.Children[j].GetType() == typeof(TextBox))
-                {
-                    _panel.Children.Remove((TextBox)_panel.Children[j]);
-                    j--;
-                }
-            }
-        }
-
-        private void AddChildrenInPanel(Grid _panel, int _columnCount)
-        {
-            for (int i = 0; i < _columnCount; i++)
-            {
-                TextBox myTextBox = new TextBox();
-
-                myTextBox.Height = 17;
-
-                myTextBox.SetValue(Grid.RowProperty, 1);
-
-                myTextBox.TextWrapping = TextWrapping.Wrap;
-
-                myTextBox.Name = "Column" + (i + 1);
-
-                myTextBox.Text = myTextBox.Name;
-
-                myTextBox.VerticalAlignment = VerticalAlignment.Top;
-
-                myTextBox.Margin = new Thickness(0, 25 * i, 0, 0);
-
-                _panel.Children.Add(myTextBox);
-            }
-        }
-
-        private RelayCommand _createTableCommand;
-        public RelayCommand CreateTableCommand
-        {
-            get
-            {
-                return _createTableCommand ??
-                    (_createTableCommand = new RelayCommand(obj => 
-                    {
-                        var _helper = new DataTableHelper();
-
-                        var _layoutPanel = (Grid)((object[])obj)[0];
-                        var _columnNames = (Dictionary<int, string>)((object[])obj)[1];
-
-                        GetColumnNames(_layoutPanel, _columnNames);
-                        ExcelTable = _helper.CreateNewDataTable(_columnNames, TableName);
-
-                        _cmbContent.Clear();
-                        for (int i = 0; i < ExcelTable.Columns.Count; i++)
-                        {
-                            _cmbContent.Add(Convert.ToString(ExcelTable.Columns[i]));
-                        }
-
-                        TableName = string.Empty;
-                        ColumnCount = string.Empty;
-                    }));
-            }
-        }
-
-        private void GetColumnNames(Grid _layoutPanel, Dictionary<int, string> _columnNames)
-        {
-            foreach (UIElement element in _layoutPanel.Children)
-            {
-                if (element is TextBox)
-                {
-                    string content = ((TextBox)element).Text;
-
-                    string name = ((TextBox)element).Name.Replace("Column", "");
-                    int id = Convert.ToInt32(name) - 1;
-
-                    _columnNames.Add(id, content);
-                }
-            }
-        }
-        #endregion
-
-        #region Filter commands
         private RelayCommand _filterCommand;
         public RelayCommand FilterCommand
         {
             get
             {
                 return _filterCommand ??
-                    (_filterCommand = new RelayCommand(obj =>
+                    (_filterCommand = new RelayCommand(obj => 
                     {
-                        var _table = (DataGrid)obj;
+                        if (TableView is null)
+                            return;
 
-                        try
-                        {
-                            DataView _dataView;
+                        string _format = string.IsNullOrWhiteSpace(Filter)
+                                      || string.IsNullOrWhiteSpace(SelectedItem) ? string.Empty : string.Format("[{0}] = '{1}'", SelectedItem, Filter);
 
-                            _dataView = _table.ItemsSource as DataView ?? null;
+                        TableView.RowFilter = _format;
 
-                            if (_dataView is null)
-                                return;
-
-                            string _format = string.IsNullOrEmpty(Filter) 
-                                          && string.IsNullOrEmpty(SelectedItem) ? null : string.Format("[{0}] = '{1}'", SelectedItem, Filter);
-
-                            _dataView.RowFilter = _format;
-                            Format = _format;
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: " + ex, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
-                        }
+                        Format = _format;
                     }));
             }
         }
 
-        private RelayCommand _filterClearCommand;
-        public RelayCommand FilterClearCommand
+        private RelayCommand _sortTableCommand;
+        public RelayCommand SortTableCommand
         {
             get
             {
-                return _filterClearCommand ??
-                    (_filterClearCommand = new RelayCommand(obj =>
+                return _sortTableCommand ??
+                    (_sortTableCommand = new RelayCommand(obj => 
                     {
-                        SelectedItem = string.Empty;
+                        if (string.IsNullOrWhiteSpace(SelectedItem2))
+                            return;
 
-                        ((TextBox)obj).Text = string.Empty;
+                        switch (SelectedMode)
+                        {
+                            case 0:
+                                Sorting = string.Format("{0} {1}", SelectedItem2, AppConstants.Ascending);
+                                break;
+                            case 1:
+                                Sorting = string.Format("{0} {1}", SelectedItem2, AppConstants.Descending);
+                                break;
+                        }
+
+                        TableView.Sort = Sorting;
                     }));
             }
         }
+
+        private RelayCommand _clearFilterCommand;
+        public RelayCommand ClearFilterCommand
+        {
+            get
+            {
+                return _clearFilterCommand ??
+                    (_clearFilterCommand = new RelayCommand(obj => 
+                    {
+                        if (TableName != null)
+                            TableView.Sort = string.Empty;
+
+                        if(!string.IsNullOrWhiteSpace(SelectedItem))
+                            SelectedItem   = string.Empty;
+
+                        if(!string.IsNullOrWhiteSpace(SelectedItem2))
+                            SelectedItem2  = string.Empty;
+
+                        if(!string.IsNullOrWhiteSpace(Filter))
+                            Filter         = string.Empty;
+
+                        if(!string.IsNullOrWhiteSpace(Format))
+                            Format         = string.Empty;
+
+                        if (!string.IsNullOrWhiteSpace(Sorting))
+                            Sorting        = string.Empty;
+
+                        ModeArray = new bool[] { true, false };
+                    }));
+            }
+        }
+
         #endregion
+
+        #region PropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
@@ -350,5 +352,7 @@ namespace AppUX.ViewModel
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
+
+        #endregion
     }
 }

@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("settings_64.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("xaml/about-information-info-help-svgrepo-com.svg")]
 
 

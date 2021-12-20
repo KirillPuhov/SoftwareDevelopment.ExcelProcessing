@@ -1,0 +1,68 @@
+﻿<Window x:Class="AppUX.Settings.SettingsWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModels="clr-namespace:AppUX.Settings.Navigation.ViewModels"
+        xmlns:local="clr-namespace:AppUX.Settings"
+        Title="{DynamicResource settings}"
+        Height="500" Width="1000" 
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}"
+        mc:Ignorable="d">
+    <Grid x:Name="Settings" Style="{DynamicResource GridStyle}">
+        <Grid Margin="10, 0, 10, 10">
+            <Grid Margin="10,10,0,0" Height="427" VerticalAlignment="Top">
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="140"/>
+                    <ColumnDefinition Width="1*"/>
+
+                </Grid.ColumnDefinitions>
+
+                <Border Style="{DynamicResource BorderStyle}" Margin="0, 13, 0, 0" Grid.Column="0" BorderThickness="2" CornerRadius="9">
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="10"/>
+                            <RowDefinition Height="22"/>
+                            <RowDefinition Height="22"/>
+                            <RowDefinition Height="22"/>
+                            <RowDefinition Height="22"/>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+
+                        <Button Command="{Binding ShowLanguageCommand}" Style="{DynamicResource SettingsButton}" Grid.Row="1" Margin="0, 0, 0, 0">
+                            <Grid Width="135">
+                                <TextBlock Text="{DynamicResource language}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
+                            </Grid>
+                        </Button>
+
+                        <Button Command="{Binding ShowThemeCommand}" Style="{DynamicResource SettingsButton}" Grid.Row="2" Margin="0, 0, 0, 0">
+                            <Grid Width="135">
+                                <TextBlock Text="{DynamicResource colorTheme}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
+                            </Grid>
+                        </Button>
+
+                        <Button Command="{Binding ShowFileCommand}" Style="{DynamicResource SettingsButton}" Grid.Row="3" Margin="0, 0, 0, 0">
+                            <Grid Width="135">
+                                <TextBlock Text="{DynamicResource fileSettings}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
+                            </Grid>
+                        </Button>
+
+                        <Button Command="{Binding ShowAboutCommand}" Style="{DynamicResource SettingsButton}" Grid.Row="4" Margin="0, 0, 0, 0">
+                            <Grid Width="135">
+                                <TextBlock Text="{DynamicResource about}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0" />
+                            </Grid>
+                        </Button>
+
+                    </Grid>
+                </Border>
+
+                <ContentControl x:Name="FrameContent"
+                        Grid.Column="1"
+                        x:FieldModifier="public" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Window>

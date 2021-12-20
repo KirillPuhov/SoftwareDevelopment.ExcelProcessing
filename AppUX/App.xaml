@@ -5,8 +5,15 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="Themes/Light.xaml"/>
-                <ResourceDictionary Source="Themes/Dark.xaml"/>
+
+                <ResourceDictionary Source="Resources/Light.xaml"/>
+                <ResourceDictionary Source="Resources/Dark.xaml"/>
+
+                <ResourceDictionary Source="Resources/DE-de.xaml"/>
+                <ResourceDictionary Source="Resources/Fr-fr.xaml"/>
+                <ResourceDictionary Source="Resources/Ru-ru.xaml"/>
+                <ResourceDictionary Source="Resources/En-en.xaml"/>
+                
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

@@ -5,6 +5,6 @@ namespace Domain.Controllers
 {
     public sealed class ExcelController : BaseExcelController
     {
-        public ExcelController(IExcelManager manager, IDataTableHelper helper) : base(manager, helper) { }
+        public ExcelController(IImportTable importer) : base(importer) { }
     }
 }
