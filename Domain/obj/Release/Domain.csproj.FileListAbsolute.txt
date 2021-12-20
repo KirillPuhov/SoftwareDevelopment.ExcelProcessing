@@ -62,7 +62,6 @@ D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\Domain\bin\Release\System.Memory.xml
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\Domain\bin\Release\System.Numerics.Vectors.xml
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\Domain\bin\Release\System.Runtime.CompilerServices.Unsafe.xml
-D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\Domain\obj\Release\Domain.csproj.AssemblyReference.cache
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\Domain\obj\Release\Domain.csproj.CoreCompileInputs.cache
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\Domain\obj\Release\Domain.csproj.CopyComplete
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\Domain\obj\Release\Domain.dll

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 // связанные со сборкой.
 [assembly: AssemblyTitle("Domain")]
 [assembly: AssemblyDescription("SoftwareDevelopment.ProcessionOfGIA")]
-[assembly: AssemblyConfiguration("0.5.0.0")]
+[assembly: AssemblyConfiguration("0.7.0.0")]
 [assembly: AssemblyCompany("SoftwareDevelopment")]
 [assembly: AssemblyProduct("Domain")]
 [assembly: AssemblyCopyright("Copyright ©  2021")]
@@ -32,5 +32,5 @@ using System.Runtime.InteropServices;
 // Можно задать все значения или принять номера сборки и редакции по умолчанию 
 // используя "*", как показано ниже:
 // [assembly: AssemblyVersion("0.5.*")]
-[assembly: AssemblyVersion("0.5.0.0")]
-[assembly: AssemblyFileVersion("0.5.0.0")]
+[assembly: AssemblyVersion("0.7.0.0")]
+[assembly: AssemblyFileVersion("0.7.0.0")]

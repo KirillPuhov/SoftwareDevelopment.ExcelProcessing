@@ -81,7 +81,6 @@ D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.5\
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\AppUX.exe.config
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\AppUX.exe
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\AppUX.pdb
-D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\ControlzEx.dll
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\Domain.dll
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\Microsoft.Xaml.Behaviors.dll
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\Newtonsoft.Json.dll
@@ -97,8 +96,6 @@ D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\System.Buffers.dll
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\Domain.pdb
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\Domain.dll.config
-D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\ControlzEx.pdb
-D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\ControlzEx.xml
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\Microsoft.Xaml.Behaviors.pdb
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\Microsoft.Xaml.Behaviors.xml
 D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v0.6\SoftwareDevelopment.ProcessingОfGIA\AppUX\bin\Release\Newtonsoft.Json.xml
