@@ -1,9 +1,10 @@
-﻿using System.Data;
+﻿using System.Collections.Generic;
+using System.Data;
 
 namespace Domain.Interfaces
 {
     public interface IImportTable
     {
-        DataTable Import(string path);
+        DataTableCollection Import(string path);
     }
 }

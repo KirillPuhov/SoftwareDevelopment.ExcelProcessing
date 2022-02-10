@@ -16,7 +16,7 @@ namespace Domain.Managers
 
         #region Import methods
 
-        public DataTable Import(string filePath)
+        public DataTableCollection Import(string filePath)
         {
             var path = string.IsNullOrWhiteSpace(filePath) ? throw new Exception("ImportOfExcel: Null or empty file path!\n") : filePath;
 
@@ -29,59 +29,56 @@ namespace Domain.Managers
                 throw new Exception("ImportOfExcel: " + ex);
             }
         }
-
-        private DataTable TryImportTable(string path)
+        private DataTableCollection TryImportTable(string path)
         {
-            var _table = new DataTable();
-            FileStream _stream = File.Open(path, FileMode.Open, FileAccess.Read);
+            DataSet _result = null;
 
-            IExcelDataReader _reader = ExcelReaderFactory.CreateReader(_stream);
-
-            DataSet _db = _reader.AsDataSet(new ExcelDataSetConfiguration()
+            using (var stream = File.Open(path, FileMode.Open, FileAccess.Read))
             {
-                ConfigureDataTable = (x) => new ExcelDataTableConfiguration()
+                using (var reader = ExcelReaderFactory.CreateReader(stream))
                 {
-                    UseHeaderRow = true
+                    _result = reader.AsDataSet(new ExcelDataSetConfiguration
+                    {
+                        UseColumnDataType = true,
+                        ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
+                        {
+                            UseHeaderRow = true
+                        }
+                    });
                 }
-            });
-
-            var _result = ConvertToDataSetOfStrings(_db);
-            _tableCollection = _result.Tables;
-
-            foreach (DataTable _data in _tableCollection)
-            {
-                _table = _data;
             }
-            return _table;
+
+            var _dataSet = DataTypeConvert(_result);
+            _tableCollection = _dataSet.Tables;
+
+            return _tableCollection;
         }
 
-        private DataSet ConvertToDataSetOfStrings(DataSet _sourceDataSet)
+        private DataSet DataTypeConvert(DataSet origDataSet)
         {
-            var _result = _sourceDataSet.Clone();
-            foreach (DataTable _table in _result.Tables)
+            var _clone = origDataSet.Clone();
+            foreach (DataTable table in _clone.Tables)
             {
-                foreach (DataColumn _column in _table.Columns)
+                for (int i = 0; i < table.Columns.Count; i++)
                 {
-                    if (_column.DataType == typeof(int) || _column.DataType == typeof(double))
-                        break;
+                    if (table.Columns[i].DataType == typeof(int) || table.Columns[i].DataType == typeof(double))
+                        continue;
 
-                    if (_column.DataType == typeof(DateTime))
-                        break;
-
-                    if (_column.DataType != typeof(string))
-                        _column.DataType = typeof(string);
+                    if (table.Columns[i].DataType != typeof(string))
+                        table.Columns[i].DataType = typeof(string);
                 }
             }
 
-            foreach (DataTable _table in _sourceDataSet.Tables)
+            foreach (DataTable table in origDataSet.Tables)
             {
-                var _targetTable = _result.Tables[_table.TableName];
-                foreach (DataRow _row in _table.Rows)
+                var _targetTable = _clone.Tables[table.TableName];
+                foreach (DataRow _row in table.Rows)
                 {
                     _targetTable.ImportRow(_row);
                 }
             }
-            return _result;
+
+            return _clone;
         }
         #endregion
     }

@@ -1,5 +1,4 @@
 ﻿using AppUX.ViewModel;
-using System;
 using System.Windows;
 using System.Windows.Controls;
 using AppUX.Animations.Methods;
@@ -15,7 +14,6 @@ namespace AppUX
         #region Fields
 
         private readonly MainViewModel _viewModel = new MainViewModel();
-
         private readonly GridAnimation _animator = new GridAnimation();
 
         #endregion
@@ -30,11 +28,20 @@ namespace AppUX
 
         #endregion
 
+        #region List selection
+
+        private void ExcelSheets_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            _viewModel.SheetChanged.Execute(null);
+        }
+
+        #endregion
+
         #region Filter
 
         private void Filter_TextChanged(object sender, TextChangedEventArgs e)
         {
-            _viewModel.Filter = FilterBox.Text;
+            _viewModel.Filter = FilterTextBox.Text;
             _viewModel.FilterCommand.Execute(null);
         }
 
@@ -68,16 +75,6 @@ namespace AppUX
         private void FilterBackButton_Click(object sender, RoutedEventArgs e)
         {
             _animator.DoubleAnimationHide(1, 0, 0.3, Filter);
-        }
-
-        #endregion
-
-        #region AutoGeneratingColumn
-
-        private void OnAutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
-        {
-            if (e.PropertyType == typeof(DateTime))
-                (e.Column as DataGridTextColumn).Binding.StringFormat = "dd.MM.yyyy";
         }
 
         #endregion

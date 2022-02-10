@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "13aeb695-7a55-4842-86ae-d86e9f1bff8c": {
+      "ProjectGuid": "13aeb695-7a55-4842-86ae-d86e9f1bff8c",
+      "DisplayName": "AppUX",
+      "ColorIndex": 0
+    },
+    "cdae3157-0f12-4441-a4a5-fe9d1155aa39": {
+      "ProjectGuid": "cdae3157-0f12-4441-a4a5-fe9d1155aa39",
+      "DisplayName": "Domain",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

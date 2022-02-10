@@ -6,6 +6,7 @@ using System;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Data;
+using System.IO;
 using System.Runtime.CompilerServices;
 
 namespace AppUX.ViewModel
@@ -15,38 +16,41 @@ namespace AppUX.ViewModel
         #region Fields
 
         private ExportController _export;
-        private readonly ExcelController _excel = new ExcelController(new ImportTableManager());
+        private DataTableCollection _dataTableCollect;
         private readonly SettingsLoader _loader = SettingsLoader.GetInstance();
+        private readonly ExcelController _excel = new ExcelController(new ImportTableManager());
 
         #endregion
 
         #region Properties
 
-        public ObservableCollection<string> ComboBoxContent { get; set; }
+        public ObservableCollection<string> FilterContent { get; set; }
+        public ObservableCollection<string> ComboBoxLists { get; set; }
         public MainViewModel()
         {
-            ComboBoxContent = new ObservableCollection<string>();
+            FilterContent = new ObservableCollection<string>();
+            ComboBoxLists = new ObservableCollection<string>();
         }
 
-        private bool[] _modeArray = new bool[] { true, false };
-        public bool[] ModeArray
+        private bool[] _sortModeArray = new bool[] { true, false };
+        public bool[] SortModeArray
         {
             get 
             { 
-                return _modeArray; 
+                return _sortModeArray; 
             }
             set
             {
-                _modeArray = value;
-                OnPropertyChanged("ModeArray");
+                _sortModeArray = value;
+                OnPropertyChanged("SortModeArray");
             }
         }
 
-        public int SelectedMode
+        public int SortSelectedMode
         {
             get
             {
-                return Array.IndexOf(_modeArray, true);
+                return Array.IndexOf(_sortModeArray, true);
             }
         }
 
@@ -72,14 +76,14 @@ namespace AppUX.ViewModel
             }
         }
 
-        private string _path;
-        public string FilePath
+        private string _openFilePath;
+        public string OpenFilePath
         {
-            get { return _path; }
+            get { return _openFilePath; }
             set
             {
-                _path = value;
-                OnPropertyChanged("FilePath");
+                _openFilePath = value;
+                OnPropertyChanged("OpenFilePath");
             }
         }
 
@@ -138,25 +142,36 @@ namespace AppUX.ViewModel
             }
         }
 
-        private string _selectedItem;
-        public string SelectedItem
+        private string _filterSelectedItem;
+        public string FilterSelectedItem
         {
-            get { return _selectedItem; }
+            get { return _filterSelectedItem; }
             set
             {
-                _selectedItem = value;
-                OnPropertyChanged("SelectedItem");
+                _filterSelectedItem = value;
+                OnPropertyChanged("FilterSelectedItem");
             }
         }
 
-        private string _selectedItem2;
-        public string SelectedItem2
+        private string _sorterSelectedItem;
+        public string SorterSelectedItem
         {
-            get { return _selectedItem2; }
+            get { return _sorterSelectedItem; }
             set
             {
-                _selectedItem2 = value;
-                OnPropertyChanged("SelectedItem2");
+                _sorterSelectedItem = value;
+                OnPropertyChanged("SorterSelectedItem");
+            }
+        }
+
+        private string _sheetsList;
+        public string SheetsList
+        {
+            get { return _sheetsList; } 
+            set 
+            {
+                _sheetsList = value; 
+                OnPropertyChanged("SheetsList"); 
             }
         }
 
@@ -172,21 +187,74 @@ namespace AppUX.ViewModel
                 return _openCommand ??
                     (_openCommand = new RelayCommand(obj =>
                     {
-                        OpenFileDialog _fileDialog = new OpenFileDialog();
-
+                        var _fileDialog = new OpenFileDialog();
                         if (_fileDialog.ShowDialog() is false)
                             return;
-                        FilePath = _fileDialog.FileName;
 
-                        if (string.IsNullOrWhiteSpace(FilePath) is true)
+                        OpenFilePath = _fileDialog.FileName;
+
+                        if (string.IsNullOrWhiteSpace(OpenFilePath) is true)
                             return;
 
-                        ExcelTable = _excel.GetTable(FilePath);
+                        _dataTableCollect = _excel.GetTable(OpenFilePath);
 
-                        ComboBoxContent.Clear();
+                        ColumnNameValidation();
+
+                        ExcelTable = _dataTableCollect[Convert.ToString(ComboBoxLists[0])];
+                        SheetsList = ComboBoxLists[0];
+
+                        FilterContent.Clear();
                         for (int i = 0; i < ExcelTable.Columns.Count; i++)
                         {
-                            ComboBoxContent.Add(Convert.ToString(ExcelTable.Columns[i]));
+                            FilterContent.Add(Convert.ToString(ExcelTable.Columns[i]));
+                        }
+                    }));
+            }
+        }
+
+        private void ColumnNameValidation()
+        {
+            ComboBoxLists.Clear();
+            foreach (DataTable _data in _dataTableCollect)
+            {
+                foreach (DataColumn _column in _data.Columns)
+                {
+                    if (_column.ColumnName.Contains("!"))
+                        _column.ColumnName = _column.ColumnName.Replace("!", "");
+
+                    if (_column.ColumnName.Contains("№"))
+                        _column.ColumnName = _column.ColumnName.Replace("№", "");
+
+                    if (_column.ColumnName.Contains("/"))
+                        _column.ColumnName = _column.ColumnName.Replace("/", "");
+
+                    if (_column.ColumnName.Contains("."))
+                        _column.ColumnName = _column.ColumnName.Replace(".", "");
+
+                    if (_column.ColumnName.Contains(","))
+                        _column.ColumnName = _column.ColumnName.Replace(",", "");
+                }
+                ComboBoxLists.Add(_data.TableName);
+            }
+        }
+
+        private RelayCommand _sheetChanged;
+        public RelayCommand SheetChanged
+        {
+            get
+            {
+                return _sheetChanged ??
+                    (_sheetChanged = new RelayCommand(obj =>
+                    {
+                        if (!string.IsNullOrWhiteSpace(SheetsList) || !string.IsNullOrEmpty(SheetsList))
+                        {
+                            ExcelTable = _dataTableCollect[Convert.ToString(SheetsList)];
+
+                            FilterContent.Clear();
+                            for (int i = 0; i < ExcelTable.Columns.Count; i++)
+                            {
+                                FilterContent.Add(Convert.ToString(ExcelTable.Columns[i]));
+                            }
                         }
                     }));
             }
@@ -207,22 +275,23 @@ namespace AppUX.ViewModel
             try
             {
                 string _fileName = null;
+                var _rnd = new Random().Next().ToString();
 
                 switch (_loader.UserSettings.DefaultSaveFile)
                 {
                     case AppConstants.ExcelFile:
                         _export = new ExportController(new ExcelManager());
-                        _fileName = AppConstants.ExcelFile + "_file.xlsx";
+                        _fileName = AppConstants.ExcelFile + "_" + _rnd + ".xlsx";
                         break;
 
                     case AppConstants.WordFile:
                         _export = new ExportController(new WordManager());
-                        _fileName = AppConstants.WordFile + "_file.docx";
+                        _fileName = AppConstants.WordFile + "_" + _rnd + ".docx";
                         break;
 
                     case AppConstants.TextFile:
                         _export = new ExportController(new TextManager());
-                        _fileName = AppConstants.TextFile + "_file.txt";
+                        _fileName = AppConstants.TextFile + "_" + _rnd + ".txt";
                         break;
                 }
 
@@ -234,29 +303,11 @@ namespace AppUX.ViewModel
                 var _data = TableView.ToTable();
                 bool _result = _export.SetTable(_data, _filePath);
 
-                FilePath = "Готово";
+                OpenFilePath = "Готово";
             }
             catch (Exception)
             {
                 throw new Exception();
-            }
-        }
-
-        private RelayCommand _gridClearCommand;
-        public RelayCommand GridClearCommand
-        {
-            get
-            {
-                return _gridClearCommand ??
-                    (_gridClearCommand = new RelayCommand(obj =>
-                    {
-                        ExcelTable   = null;
-                        SelectedItem = null;
-                        Filter       = null;
-                        Format       = null;
-                        FilePath     = null;
-                        ComboBoxContent.Clear();
-                    }));
             }
         }
 
@@ -275,11 +326,24 @@ namespace AppUX.ViewModel
                         if (TableView is null)
                             return;
 
-                        string _format = string.IsNullOrWhiteSpace(Filter)
-                                      || string.IsNullOrWhiteSpace(SelectedItem) ? string.Empty : string.Format("[{0}] = '{1}'", SelectedItem, Filter);
+                        string _format = null;
+                        if (int.TryParse(Filter, out int i))
+                        {
+                            _format = string.IsNullOrWhiteSpace(Filter)
+                                      || string.IsNullOrWhiteSpace(FilterSelectedItem) ? string.Empty : string.Format("[{0}] = '{1}'", FilterSelectedItem, Filter);
+                        }
+                        else if (double.TryParse(Filter, out double d))
+                        {
+                            _format = string.IsNullOrWhiteSpace(Filter)
+                                      || string.IsNullOrWhiteSpace(FilterSelectedItem) ? string.Empty : string.Format("[{0}] = '{1}'", FilterSelectedItem, Filter);
+                        }
+                        else
+                        {
+                            _format = string.IsNullOrWhiteSpace(Filter)
+                                      || string.IsNullOrWhiteSpace(FilterSelectedItem) ? string.Empty : string.Format("[{0}] LIKE '%{1}%'", FilterSelectedItem, Filter);
+                        }
 
                         TableView.RowFilter = _format;
-
                         Format = _format;
                     }));
             }
@@ -293,16 +357,16 @@ namespace AppUX.ViewModel
                 return _sortTableCommand ??
                     (_sortTableCommand = new RelayCommand(obj => 
                     {
-                        if (string.IsNullOrWhiteSpace(SelectedItem2))
+                        if (string.IsNullOrWhiteSpace(SorterSelectedItem))
                             return;
 
-                        switch (SelectedMode)
+                        switch (SortSelectedMode)
                         {
                             case 0:
-                                Sorting = string.Format("{0} {1}", SelectedItem2, AppConstants.Ascending);
+                                Sorting = string.Format("{0} {1}", SorterSelectedItem, AppConstants.Ascending);
                                 break;
                             case 1:
-                                Sorting = string.Format("{0} {1}", SelectedItem2, AppConstants.Descending);
+                                Sorting = string.Format("{0} {1}", SorterSelectedItem, AppConstants.Descending);
                                 break;
                         }
 
@@ -319,25 +383,50 @@ namespace AppUX.ViewModel
                 return _clearFilterCommand ??
                     (_clearFilterCommand = new RelayCommand(obj => 
                     {
-                        if (TableName != null)
-                            TableView.Sort = string.Empty;
+                        if (Sorting != null)
+                            TableView.Sort = null;
 
-                        if(!string.IsNullOrWhiteSpace(SelectedItem))
-                            SelectedItem   = string.Empty;
+                        if (!string.IsNullOrWhiteSpace(FilterSelectedItem))
+                            FilterSelectedItem = string.Empty;
 
-                        if(!string.IsNullOrWhiteSpace(SelectedItem2))
-                            SelectedItem2  = string.Empty;
-
-                        if(!string.IsNullOrWhiteSpace(Filter))
-                            Filter         = string.Empty;
-
-                        if(!string.IsNullOrWhiteSpace(Format))
-                            Format         = string.Empty;
+                        if(!string.IsNullOrWhiteSpace(SorterSelectedItem))
+                            SorterSelectedItem = string.Empty;
 
                         if (!string.IsNullOrWhiteSpace(Sorting))
-                            Sorting        = string.Empty;
+                            Sorting            = string.Empty;
 
-                        ModeArray = new bool[] { true, false };
+                        if (!string.IsNullOrWhiteSpace(Filter))
+                            Filter             = string.Empty;
+
+                        if(!string.IsNullOrWhiteSpace(Format))
+                            Format             = string.Empty;
+
+                        if (!string.IsNullOrWhiteSpace(Sorting))
+                            Sorting            = string.Empty;
+
+                        SortModeArray = new bool[] { true, false };
+                    }));
+            }
+        }
+
+        private RelayCommand _gridClearCommand;
+        public RelayCommand GridClearCommand
+        {
+            get
+            {
+                return _gridClearCommand ??
+                    (_gridClearCommand = new RelayCommand(obj =>
+                    {
+                        _dataTableCollect  = null;
+                        ExcelTable         = null;
+                        FilterSelectedItem = null;
+                        SheetsList         = null;
+                        Filter             = null;
+                        Format             = null;
+                        OpenFilePath       = null;
+                        FilterContent.Clear();
+                        ComboBoxLists.Clear();
+
                     }));
             }
         }

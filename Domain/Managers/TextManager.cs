@@ -2,6 +2,7 @@
 using System;
 using System.Data;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Domain.Managers
 {
@@ -9,7 +10,7 @@ namespace Domain.Managers
     {
         #region Fields
 
-        private char space = (char)32;
+        private readonly char semicolon = (char)59;
 
         #endregion
 
@@ -19,7 +20,9 @@ namespace Domain.Managers
         {
             try
             {
-                return TryExportTable(table, fileName);
+                TryExportTable(table, fileName);
+
+                return true;
             }
             catch (Exception ex)
             {
@@ -27,31 +30,32 @@ namespace Domain.Managers
             }
         }
 
-        private bool TryExportTable(DataTable table, string fileName)
+        private async void TryExportTable(DataTable table, string fileName)
         {
             string _headers = null;
 
-            foreach (DataColumn item in table.Columns)
+            await Task.Run(() => 
             {
-                _headers += item.ColumnName + space;
-            }
-
-            if (!File.Exists(fileName))
-                File.WriteAllText(fileName, _headers);
-
-            foreach (DataRow row in table.Rows)
-            {
-                string _row = "\n";
-
-                foreach (var _word in row.ItemArray)
+                foreach (DataColumn item in table.Columns)
                 {
-                    _row += Convert.ToString(_word) + space;
+                    _headers += item.ColumnName + semicolon;
                 }
 
-                File.AppendAllText(fileName, _row);
-            }
+                if (!File.Exists(fileName))
+                    File.WriteAllText(fileName, _headers);
 
-            return true;
+                foreach (DataRow row in table.Rows)
+                {
+                    string _row = "\n";
+
+                    foreach (var _word in row.ItemArray)
+                    {
+                        _row += Convert.ToString(_word) + semicolon;
+                    }
+
+                    File.AppendAllText(fileName, _row);
+                }
+            });
         }
 
         #endregion

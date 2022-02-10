@@ -31,12 +31,12 @@
         </Menu>
 
         <Button x:Name="FilterButton" Style="{DynamicResource DefaultButton}" Click="FilterOpenButton_Click" Content="{DynamicResource filter}" HorizontalAlignment="Left" Width="75" Height="20" VerticalAlignment="Top" Margin="75,0,0,0"/>
-        <DataGrid x:Name="ExcelTable" AutoGeneratingColumn="OnAutoGeneratingColumn" Style="{DynamicResource DataGridStyle}" Margin="0,20,0,25" ItemsSource="{Binding Path=ExcelTable, Mode=TwoWay}" BorderBrush="{x:Null}"/>
+        <DataGrid x:Name="ExcelTable" Style="{DynamicResource DataGridStyle}" Margin="0,20,0,25" ItemsSource="{Binding Path=ExcelTable, Mode=TwoWay}" BorderBrush="{x:Null}" CanUserSortColumns="False"/>
 
         <Grid Background="#FF2E7D32" Height="25" VerticalAlignment="Bottom" >
 
-            <Label x:Name="PathLabel" Content="{Binding Path=FilePath}" Background="#FF2E7D32" Foreground="WhiteSmoke" FontFamily="Segoe UI" FontSize="12" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="300"/>
-
+            <Label x:Name="PathLabel" Content="{Binding Path=OpenFilePath}" Background="#FF2E7D32" Foreground="WhiteSmoke" FontFamily="Segoe UI" FontSize="12" Height="25" VerticalAlignment="Bottom" HorizontalAlignment="Left" Width="300"/>
+            <ComboBox x:Name="ExcelSheets" Width="500" Style="{DynamicResource HeaderComboBox}" ItemsSource="{Binding ComboBoxLists}" SelectedItem="{Binding SheetsList, Mode=TwoWay}" SelectionChanged="ExcelSheets_SelectionChanged"/>
             <Button x:Name="SaveButton" Style="{DynamicResource DefaultButton}" Command="{Binding Path=SaveCommand}" Content="{DynamicResource save}" HorizontalAlignment="Right" Height="25" Width="75" Foreground="WhiteSmoke"/>
 
         </Grid>
@@ -57,23 +57,23 @@
                                 <ColumnDefinition Width="1*" />
                             </Grid.ColumnDefinitions>
                             <TextBlock Grid.Column="0" Style="{DynamicResource TextBlockStyle}" Text="{DynamicResource column}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="50, 0, 0, 0"/>
-                            <ComboBox x:Name="SelectColumnBox" Grid.Column="0" ItemsSource="{Binding Path=ComboBoxContent}" SelectedValue="{Binding Path=SelectedItem, Mode=TwoWay}" FontFamily="Segoe UI" FontSize="9"  Style="{DynamicResource HeaderComboBox}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 25, 0" Width="200"/>
+                            <ComboBox x:Name="FilterComboBox" Grid.Column="0" ItemsSource="{Binding Path=FilterContent}" SelectedValue="{Binding Path=FilterSelectedItem, Mode=TwoWay}" FontFamily="Segoe UI" FontSize="9"  Style="{DynamicResource HeaderComboBox}" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 25, 0" Width="200"/>
 
                             <TextBlock Grid.Column="1" Style="{DynamicResource TextBlockStyle}" Text="{DynamicResource filter}" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="25, 0, 0, 0"/>
-                            <TextBox x:Name="FilterBox" Text="{Binding Path=Filter, Mode=TwoWay}" TextChanged="Filter_TextChanged" Height="17" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 60, 0" Width="200" MaxLength="25"/>
+                            <TextBox x:Name="FilterTextBox" Text="{Binding Path=Filter, Mode=TwoWay}" TextChanged="Filter_TextChanged" Height="17" TextWrapping="Wrap" Grid.Column="1" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0, 0, 60, 0" Width="200" MaxLength="25"/>
                         </Grid>
                     </GroupBox>
 
                     <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,160,13,0" Header="{DynamicResource sort}" VerticalAlignment="Top" Height="135" Padding="12">
                         <Grid VerticalAlignment="Bottom" Height="120" Margin="-172,-39,-172,-71">
-                            <ComboBox ItemsSource="{Binding Path=ComboBoxContent}" SelectedValue="{Binding Path=SelectedItem2, Mode=TwoWay}" FontFamily="Segoe UI" FontSize="9" Style="{DynamicResource HeaderComboBox}" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="0, 5, 0, 0"/>
+                            <ComboBox x:Name="SorterComboBox" ItemsSource="{Binding Path=FilterContent}" SelectedValue="{Binding Path=SorterSelectedItem, Mode=TwoWay}" FontFamily="Segoe UI" FontSize="9" Style="{DynamicResource HeaderComboBox}" VerticalAlignment="Top" HorizontalAlignment="Center" Width="200" Margin="0, 5, 0, 0"/>
                             <Grid Margin="0,25,0,0">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="1*"/>
                                     <ColumnDefinition Width="1*"/>
                                 </Grid.ColumnDefinitions>
 
-                                <RadioButton Command="{Binding SortTableCommand}" Grid.Column="0" IsChecked="{Binding Path=ModeArray[0], Mode=TwoWay}" x:Name="ExcelFile" Style="{DynamicResource DefaultRadioButton}" Margin="10">
+                                <RadioButton Command="{Binding SortTableCommand}" Grid.Column="0" IsChecked="{Binding Path=SortModeArray[0], Mode=TwoWay}" x:Name="ExcelFile" Style="{DynamicResource DefaultRadioButton}" Margin="10">
                                     <StackPanel>
                                         <Viewbox Stretch="Uniform" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="45" Width="60">
                                             <Canvas Height="256" Width="256">
@@ -83,7 +83,7 @@
                                         <TextBlock Text="{DynamicResource ascending}" Width="110" TextAlignment="Center"/>
                                     </StackPanel>
                                 </RadioButton>
-                                <RadioButton Command="{Binding SortTableCommand}" Grid.Column="1" IsChecked="{Binding Path=ModeArray[1], Mode=TwoWay}" x:Name="WordFile" Style="{DynamicResource DefaultRadioButton}" Margin="10" Grid.ColumnSpan="2">
+                                <RadioButton Command="{Binding SortTableCommand}" Grid.Column="1" IsChecked="{Binding Path=SortModeArray[1], Mode=TwoWay}" x:Name="WordFile" Style="{DynamicResource DefaultRadioButton}" Margin="10" Grid.ColumnSpan="2">
                                     <StackPanel>
                                         <Viewbox Stretch="Uniform" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="45" Width="60">
                                             <Canvas Height="256" Width="256">

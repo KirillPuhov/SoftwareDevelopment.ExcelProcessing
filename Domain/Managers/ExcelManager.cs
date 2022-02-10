@@ -3,6 +3,7 @@ using OfficeOpenXml;
 using System;
 using System.Data;
 using System.IO;
+using System.Threading.Tasks;
 
 namespace Domain.Managers
 {
@@ -14,7 +15,8 @@ namespace Domain.Managers
         {
             try
             {
-                return TryExport(table, filePath);   
+                TryExport(table, filePath);
+                return true;
             }
             catch (Exception ex)
             {
@@ -23,20 +25,23 @@ namespace Domain.Managers
             }
         }
 
-        private bool TryExport(DataTable table, string filePath)
+        private async void TryExport(DataTable table, string filePath)
         {
             FileInfo newFile = new FileInfo(filePath);
-            using (ExcelPackage pck = new ExcelPackage(newFile))
-            {
-                ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DataTable");
-                ws.Cells["A1"].LoadFromDataTable(table, true);
 
-                if (ws is null)
-                    return false;
-                else
-                    pck.Save(); 
-            }
-            return true;
+            await Task.Run(() => 
+            {
+                using (ExcelPackage pck = new ExcelPackage(newFile))
+                {
+                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DataTable");
+                    ws.Cells["A1"].LoadFromDataTable(table, true);
+
+                    if (ws is null)
+                        throw new ArgumentNullException("ws was null");
+                    else
+                        pck.Save();
+                }
+            });
         }
 
         #endregion
