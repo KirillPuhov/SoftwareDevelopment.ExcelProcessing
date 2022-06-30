@@ -5,9 +5,11 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppUX.Settings.Navigation.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             SnapsToDevicePixels="True">
+    
     <Grid x:Name="LanguagePage" Grid.Column="1" Opacity="1" Visibility="Visible">
-        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,13,13,0" Header="{DynamicResource about}" VerticalAlignment="Top" Height="170" Padding="12">
+        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,0,13,0" Header="{DynamicResource about}" VerticalAlignment="Top" Height="170" Padding="12">
             <Grid VerticalAlignment="Center" Height="154" Margin="-196,-47,-196,-88">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
@@ -15,35 +17,35 @@
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" Text="{DynamicResource developer}" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="25" Margin="0, 0, 150, 0"/>
-                <TextBlock Grid.Row="0" Text="Puhov Kirill" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="25" Margin="150, 0, 0, 0"/>
-                <TextBlock Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="25">
+                <TextBlock Grid.Row="0" Text="{DynamicResource developer}" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="12" Margin="0, 0, 70, 0"/>
+                <TextBlock Grid.Row="0" Text="Puhov Kirill" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="12" Margin="70, 0, 0, 0"/>
+                <TextBlock Grid.Row="1" HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="12">
                     GitHub:
-                    <Hyperlink Click="Hyperlink1_Click" Foreground="#FF2E7D32">https://github.com/KirillPuhov</Hyperlink>
+                    <Hyperlink Click="Hyperlink1_Click" Style="{DynamicResource HyperlinkStyle}" >https://github.com/KirillPuhov</Hyperlink>
                 </TextBlock>
-                <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Text="{DynamicResource gratitude}"/>
+                <TextBlock Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="30" Text="{DynamicResource gratitude}"/>
             </Grid>
         </GroupBox>
 
-        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,200,13,0" Header="{DynamicResource packages}" VerticalAlignment="Top" Height="130" Padding="12">
-            <Grid VerticalAlignment="Center" Height="115" Margin="-196,-37,-196,-69">
+        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,187,13,0" Header="{DynamicResource packages}" VerticalAlignment="Top" Height="100" Padding="12">
+            <Grid VerticalAlignment="Center" Height="90" Margin="-196,-37,-196,-69">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                     <RowDefinition Height="1*"/>
                 </Grid.RowDefinitions>
 
-                <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15">
+                <TextBlock Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12">
                     DocX:
-                    <Hyperlink Click="Hyperlink2_Click" Foreground="#FF2E7D32">https://github.com/xceedsoftware/DocX</Hyperlink>
+                    <Hyperlink Click="Hyperlink2_Click" Style="{DynamicResource HyperlinkStyle}" >https://github.com/xceedsoftware/DocX</Hyperlink>
                 </TextBlock>
-                <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15">
+                <TextBlock Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12">
                     EPPlus:
-                    <Hyperlink Click="Hyperlink3_Click" Foreground="#FF2E7D32">https://github.com/EPPlusSoftware/EPPlus</Hyperlink>
+                    <Hyperlink Click="Hyperlink3_Click" Style="{DynamicResource HyperlinkStyle}" >https://github.com/EPPlusSoftware/EPPlus</Hyperlink>
                 </TextBlock>
-                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15">
+                <TextBlock Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="12">
                     ExcelDataReader:
-                    <Hyperlink Click="Hyperlink4_Click" Foreground="#FF2E7D32">https://github.com/ExcelDataReader/ExcelDataReader</Hyperlink>
+                    <Hyperlink Click="Hyperlink4_Click" Style="{DynamicResource HyperlinkStyle}" >https://github.com/ExcelDataReader/ExcelDataReader</Hyperlink>
                 </TextBlock>
             </Grid>
         </GroupBox>

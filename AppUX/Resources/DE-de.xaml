@@ -10,6 +10,7 @@
     <system:String x:Key="create">Schaffen</system:String>
     <system:String x:Key="close">Nah dran</system:String>
     <system:String x:Key="save">Speichern</system:String>
+    <system:String x:Key="report">Prüfbericht</system:String>
     <system:String x:Key="column">Spalte</system:String>
     <system:String x:Key="clear">Klar</system:String>
     <system:String x:Key="back">Zurück</system:String>
@@ -28,6 +29,11 @@
     <system:String x:Key="developer">Entwickler:</system:String>
     <system:String x:Key="ascending">Aufsteigend</system:String>
     <system:String x:Key="descending">Absteigend</system:String>
+    <system:String x:Key="numberOfParticipants">Zahl der Teilnehmer</system:String>
+    <system:String x:Key="averagePoint">Durchschnittlicher Punkt</system:String>
+    <system:String x:Key="maxPoint">Höchste Punktzahl</system:String>
+    <system:String x:Key="minPoint">Mindestpunktzahl</system:String>
+    <system:String x:Key="statistic">Statistik</system:String>
     <system:String x:Key="gratitude">Vielen Dank für die Nutzung unseres Programms!</system:String>
 
 </ResourceDictionary>

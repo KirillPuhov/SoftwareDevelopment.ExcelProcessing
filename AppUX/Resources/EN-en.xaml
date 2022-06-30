@@ -10,6 +10,7 @@
     <system:String x:Key="create">Create</system:String>
     <system:String x:Key="close">Close</system:String>
     <system:String x:Key="save">Save</system:String>
+    <system:String x:Key="report">Report</system:String>
     <system:String x:Key="column">Column</system:String>
     <system:String x:Key="clear">Clear</system:String>
     <system:String x:Key="back">Back</system:String>
@@ -28,6 +29,11 @@
     <system:String x:Key="developer">Developer:</system:String>
     <system:String x:Key="ascending">Аscending</system:String>
     <system:String x:Key="descending">Descending</system:String>
+    <system:String x:Key="numberOfParticipants">Number of participants</system:String>
+    <system:String x:Key="averagePoint">Average point</system:String>
+    <system:String x:Key="maxPoint">Max point</system:String>
+    <system:String x:Key="minPoint">Min point</system:String>
+    <system:String x:Key="statistic">Statistic</system:String>
     <system:String x:Key="gratitude">Thanks for using our program!</system:String>
 
 </ResourceDictionary>

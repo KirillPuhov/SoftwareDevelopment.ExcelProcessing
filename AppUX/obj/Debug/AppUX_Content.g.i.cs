@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("xaml/about-information-info-help-svgrepo-com.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("infinity-svgrepo-com.svg")]
 
 

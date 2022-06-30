@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v1.0\SoftwareDevelopment.ProcessingОfGIA\AppUX\obj\Release\
+D:\source\repos\SoftwareDevelopment.ProcessingОfGIA\v2.0\SoftwareDevelopment.ProcessingОfGIA\AppUX\obj\Release\
 AppUX
 none
 false
 TRACE
-D:\source\repos\SoftwareDevelopment.ProcessingОfGIA(versions)\new version\v1.0\SoftwareDevelopment.ProcessingОfGIA\AppUX\App.xaml
-271716502968
+D:\source\repos\SoftwareDevelopment.ProcessingОfGIA\v2.0\SoftwareDevelopment.ProcessingОfGIA\AppUX\App.xaml
+26-257863476
 
-28-526458861
-21362857943
-Resources\DE-de.xaml;Resources\EN-en.xaml;Resources\FR-fr.xaml;Resources\RU-ru.xaml;Settings\Navigation\Pages\AboutView.xaml;Settings\Navigation\Pages\FileView.xaml;Settings\Navigation\Pages\LanguageView.xaml;Settings\Navigation\Pages\ThemeView.xaml;Settings\SettingsWindow.xaml;Xaml\crosssvgrepocom.xaml;Xaml\icons8microsoftexcel.xaml;MainWindow.xaml;SplashScreen.xaml;Resources\Dark.xaml;Resources\Light.xaml;Xaml\aboutinformationinfohelpsvgrepocom.xaml;Xaml\colorpalettesvgrepocom.xaml;Xaml\filesvgrepocom.xaml;Xaml\languagesvgrepocom.xaml;Xaml\microsoftexcel2013logosvgrepocom.xaml;Xaml\microsoftword2013logologosvgrepocom.xaml;Xaml\moonsvgrepocom.xaml;Xaml\notepadwithtextsvgrepocom.xaml;Xaml\settingssvgrepocom.xaml;Xaml\sortascendingduotonesvgrepocom.xaml;Xaml\sortdescendingduotonesvgrepocom.xaml;Xaml\sunsvgrepocom.xaml;
+38-1775717982
+33-1907847552
+Control\Window\FilterDialogVertical.xaml;Control\Window\TextDialog.xaml;Control\Window\WindowControlBox.xaml;Graph\GraphicRepresentation.xaml;Resources\DE-de.xaml;Resources\EN-en.xaml;Resources\FR-fr.xaml;Resources\RU-ru.xaml;Settings\Navigation\Pages\AboutView.xaml;Settings\Navigation\Pages\FileView.xaml;Settings\Navigation\Pages\LanguageView.xaml;Settings\Navigation\Pages\ThemeView.xaml;Settings\SettingsWindow.xaml;Theme\Window.xaml;Xaml\icons8microsoftexcel.xaml;MainWindow.xaml;SplashScreen.xaml;Resources\Dark.xaml;Resources\Light.xaml;Xaml\infinitysvgrepocom.xaml;Xaml\microsoftword2013logologosvgrepocom.xaml;Xaml\moonsvgrepocom.xaml;Xaml\notebooksvgrepocom.xaml;Xaml\sortascendingduotonesvgrepocom.xaml;Xaml\sortdescendingduotonesvgrepocom.xaml;Xaml\sunsvgrepocom.xaml;
 
 False
 

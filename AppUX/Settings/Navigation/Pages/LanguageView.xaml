@@ -6,28 +6,30 @@
              xmlns:local="clr-namespace:AppUX.Settings.Navigation.Pages"
              mc:Ignorable="d" 
              d:DesignHeight="450" 
-             d:DesignWidth="800">
+             d:DesignWidth="800"
+             SnapsToDevicePixels="True">
+    
     <Grid x:Name="LanguagePage" Grid.Column="1" Opacity="1" Visibility="Visible">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="80"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,13,13,0" Header="{DynamicResource language}" VerticalAlignment="Top" Height="170" Padding="12">
+        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,0,13,0" Header="{DynamicResource language}" VerticalAlignment="Top" Height="170" Padding="12">
             <Grid x:Name="LanguageRadioButton" VerticalAlignment="Center" Height="154" Margin="-180,-47,-180,-88">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <Border Margin="10" Background="#FFBDBDBD" BorderThickness="1" CornerRadius="3">
-                    <ListBox Margin="3" x:Name="list" ItemContainerStyle="{DynamicResource styleListBoxItem}" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectLanguage}" Background="#FFBDBDBD" BorderBrush="{x:Null}"/>
+                <Border Margin="3" Background="#33000000" BorderThickness="1" CornerRadius="3">
+                    <ListBox Margin="3" x:Name="list" ItemContainerStyle="{DynamicResource StyleListBoxItem}" ItemsSource="{Binding Languages}" SelectedValue="{Binding SelectLanguage}" Background="Transparent" BorderBrush="{x:Null}"/>
                 </Border>
             </Grid>
         </GroupBox>
 
         <StackPanel Margin="0, 13, 0, 0" Grid.Column="2">
-            <Button Command="{Binding ApplySettingsCommand}" x:Name="SetSettingsButton" Content="{DynamicResource apply}" Style="{DynamicResource RoundedButton}" Margin="0"/>
-            <Button Command="{Binding BackSettingsCommand}" x:Name="DefaultSettingsButton" Content="{DynamicResource back}" Style="{DynamicResource RoundedButton}" Margin="0, 7, 0, 0"/>
+            <Button Command="{Binding ApplySettingsCommand}" x:Name="SetSettingsButton" Content="{DynamicResource apply}" Style="{DynamicResource RoundedButton}" Margin="0" Background="Transparent"/>
+            <Button Command="{Binding BackSettingsCommand}" x:Name="DefaultSettingsButton" Content="{DynamicResource back}" Style="{DynamicResource RoundedButton}" Margin="0, 7, 0, 0" Background="Transparent"/>
         </StackPanel>
     </Grid>
 </UserControl>

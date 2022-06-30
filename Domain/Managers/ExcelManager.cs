@@ -27,19 +27,19 @@ namespace Domain.Managers
 
         private async void TryExport(DataTable table, string filePath)
         {
-            FileInfo newFile = new FileInfo(filePath);
+            var _newFile = new FileInfo(filePath);
 
             await Task.Run(() => 
             {
-                using (ExcelPackage pck = new ExcelPackage(newFile))
+                using (ExcelPackage _package = new ExcelPackage(_newFile))
                 {
-                    ExcelWorksheet ws = pck.Workbook.Worksheets.Add("DataTable");
-                    ws.Cells["A1"].LoadFromDataTable(table, true);
+                    ExcelWorksheet _worksSheet = _package.Workbook.Worksheets.Add("DataTable");
+                    _worksSheet.Cells["A1"].LoadFromDataTable(table, true);
 
-                    if (ws is null)
+                    if (_worksSheet is null)
                         throw new ArgumentNullException("ws was null");
                     else
-                        pck.Save();
+                        _package.Save();
                 }
             });
         }

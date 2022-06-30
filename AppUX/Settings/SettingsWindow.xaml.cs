@@ -1,11 +1,8 @@
-﻿using System.Windows;
+﻿using AppUX.Theme.Window;
 
 namespace AppUX.Settings
 {
-    /// <summary>
-    /// Логика взаимодействия для SettingsWindow.xaml
-    /// </summary>
-    public partial class SettingsWindow : Window
+    public partial class SettingsWindow : RayeWindow
     {
         public SettingsWindow()
         {

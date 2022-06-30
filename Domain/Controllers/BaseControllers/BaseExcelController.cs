@@ -12,9 +12,9 @@ namespace Domain.Controllers.BaseControllers
             _importer = importer;
         }
 
-        public DataTableCollection GetTable(string _path) 
+        public DataTableCollection GetTable(string path) 
         {
-            return _importer.Import(_path);
+            return _importer.Import(path);
         }
     }
 }

@@ -3,6 +3,7 @@ using ExcelDataReader;
 using System;
 using System.Data;
 using System.IO;
+using System.Windows;
 
 namespace Domain.Managers
 {
@@ -18,26 +19,27 @@ namespace Domain.Managers
 
         public DataTableCollection Import(string filePath)
         {
-            var path = string.IsNullOrWhiteSpace(filePath) ? throw new Exception("ImportOfExcel: Null or empty file path!\n") : filePath;
+            var _path = string.IsNullOrWhiteSpace(filePath) ? throw new Exception("ImportOfExcel: Null or empty file path!\n") : filePath;
 
             try
             {
-                return TryImportTable(path);
+                return TryImportTable(_path);
             }
-            catch (Exception ex)
+            catch (IOException io)
             {
-                throw new Exception("ImportOfExcel: " + ex);
+                MessageBox.Show(io.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                return null;
             }
         }
         private DataTableCollection TryImportTable(string path)
         {
             DataSet _result = null;
 
-            using (var stream = File.Open(path, FileMode.Open, FileAccess.Read))
+            using (var _stream = File.Open(path, FileMode.Open, FileAccess.Read))
             {
-                using (var reader = ExcelReaderFactory.CreateReader(stream))
+                using (var _reader = ExcelReaderFactory.CreateReader(_stream))
                 {
-                    _result = reader.AsDataSet(new ExcelDataSetConfiguration
+                    _result = _reader.AsDataSet(new ExcelDataSetConfiguration
                     {
                         UseColumnDataType = true,
                         ConfigureDataTable = (tableReader) => new ExcelDataTableConfiguration()
@@ -57,22 +59,22 @@ namespace Domain.Managers
         private DataSet DataTypeConvert(DataSet origDataSet)
         {
             var _clone = origDataSet.Clone();
-            foreach (DataTable table in _clone.Tables)
+            foreach (DataTable _table in _clone.Tables)
             {
-                for (int i = 0; i < table.Columns.Count; i++)
+                for (int i = 0; i < _table.Columns.Count; i++)
                 {
-                    if (table.Columns[i].DataType == typeof(int) || table.Columns[i].DataType == typeof(double))
+                    if (_table.Columns[i].DataType == typeof(int) || _table.Columns[i].DataType == typeof(double))
                         continue;
 
-                    if (table.Columns[i].DataType != typeof(string))
-                        table.Columns[i].DataType = typeof(string);
+                    if (_table.Columns[i].DataType != typeof(string))
+                        _table.Columns[i].DataType = typeof(string);
                 }
             }
 
-            foreach (DataTable table in origDataSet.Tables)
+            foreach (DataTable _table in origDataSet.Tables)
             {
-                var _targetTable = _clone.Tables[table.TableName];
-                foreach (DataRow _row in table.Rows)
+                var _targetTable = _clone.Tables[_table.TableName];
+                foreach (DataRow _row in _table.Rows)
                 {
                     _targetTable.ImportRow(_row);
                 }

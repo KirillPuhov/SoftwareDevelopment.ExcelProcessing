@@ -10,7 +10,7 @@ namespace Domain.Managers
     {
         #region Fields
 
-        private readonly char semicolon = (char)59;
+        private readonly char _semicolon = (char)59;
 
         #endregion
 
@@ -36,24 +36,24 @@ namespace Domain.Managers
 
             await Task.Run(() => 
             {
-                foreach (DataColumn item in table.Columns)
+                foreach (DataColumn _item in table.Columns)
                 {
-                    _headers += item.ColumnName + semicolon;
+                    _headers += _item.ColumnName + _semicolon;
                 }
 
                 if (!File.Exists(fileName))
                     File.WriteAllText(fileName, _headers);
 
-                foreach (DataRow row in table.Rows)
+                foreach (DataRow _row in table.Rows)
                 {
-                    string _row = "\n";
+                    string _rows = "\n";
 
-                    foreach (var _word in row.ItemArray)
+                    foreach (var _word in _row.ItemArray)
                     {
-                        _row += Convert.ToString(_word) + semicolon;
+                        _rows += Convert.ToString(_word) + _semicolon;
                     }
 
-                    File.AppendAllText(fileName, _row);
+                    File.AppendAllText(fileName, _rows);
                 }
             });
         }

@@ -8,6 +8,8 @@
 
                 <ResourceDictionary Source="Resources/Light.xaml"/>
                 <ResourceDictionary Source="Resources/Dark.xaml"/>
+                
+                <ResourceDictionary Source="Theme/Window.xaml" />
 
                 <ResourceDictionary Source="Resources/DE-de.xaml"/>
                 <ResourceDictionary Source="Resources/Fr-fr.xaml"/>

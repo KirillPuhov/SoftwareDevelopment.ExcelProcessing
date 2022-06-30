@@ -1,10 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using Domain.Models;
+using System.Collections.Generic;
 
 namespace AppUX.Constants
 {
     public static class AppConstants
     {
         public const string JsonSettingsFilePath = @"./setting.json";
+        public const string GraphImageFilePath   = @"./graphs/new_graph.png";
         public const string UserFilePath         = @"C:\Users\micro\Desktop";
         public const string ResourcesFolder      = @"Resources/";
         public const string ExcelFile            = @"Excel";
@@ -14,6 +16,8 @@ namespace AppUX.Constants
         public const string LightTheme           = @"Light";
         public const string Ascending            = @"ASC";
         public const string Descending           = @"DESC";
+
+        public static List<OgeReportsModel> OgeReportsModelList = new List<OgeReportsModel>();
 
         public static Dictionary<string, string> LanguagesDictionary = new Dictionary<string, string>()
         {

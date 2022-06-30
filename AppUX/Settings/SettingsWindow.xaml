@@ -1,68 +1,78 @@
-﻿<Window x:Class="AppUX.Settings.SettingsWindow"
+﻿<theme:RayeWindow 
+        x:Class="AppUX.Settings.SettingsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModels="clr-namespace:AppUX.Settings.Navigation.ViewModels"
-        xmlns:local="clr-namespace:AppUX.Settings"
-        Title="{DynamicResource settings}"
+        xmlns:settings="clr-namespace:AppUX.Settings"
+        xmlns:theme="clr-namespace:AppUX.Theme.Window"
         Height="500" Width="1000" 
         ResizeMode="NoResize"
-        WindowStartupLocation="CenterOwner"
         d:DataContext="{d:DesignInstance viewModels:SettingsViewModel}"
-        mc:Ignorable="d">
+        mc:Ignorable="d"
+        WindowStartupLocation="CenterOwner" 
+        FontFamily="Segoe UI" MinimizeBox="False" MaximizeBox="False"
+        ShowInTaskbar="False"
+        SnapsToDevicePixels="True">
+    
     <Grid x:Name="Settings" Style="{DynamicResource GridStyle}">
-        <Grid Margin="10, 0, 10, 10">
-            <Grid Margin="10,10,0,0" Height="427" VerticalAlignment="Top">
-                <Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0" VerticalAlignment="Top" Height="80" Background="#33000000">
+            <Path Width="60" Height="30" Stretch="Fill" Fill="White" Data="M8.12132 9.87868L10.2044 11.9617L10.2106 11.9555L11.6631 13.408L11.6693 13.4142L13.7907 15.5355C15.7433 17.4882 18.9091 17.4882 20.8617 15.5355C22.8144 13.5829 22.8144 10.4171 20.8617 8.46447C18.9091 6.51184 15.7433 6.51184 13.7907 8.46447L13.0773 9.17786L14.4915 10.5921L15.2049 9.87868C16.3764 8.70711 18.2759 8.70711 19.4475 9.87868C20.6191 11.0503 20.6191 12.9497 19.4475 14.1213C18.2759 15.2929 16.3764 15.2929 15.2049 14.1213L13.1326 12.0491L13.1263 12.0554L9.53553 8.46447C7.58291 6.51184 4.41709 6.51184 2.46447 8.46447C0.511845 10.4171 0.511845 13.5829 2.46447 15.5355C4.41709 17.4882 7.58291 17.4882 9.53553 15.5355L10.2488 14.8222L8.83463 13.408L8.12132 14.1213C6.94975 15.2929 5.05025 15.2929 3.87868 14.1213C2.70711 12.9497 2.70711 11.0503 3.87868 9.87868C5.05025 8.70711 6.94975 8.70711 8.12132 9.87868Z" />
+        </Grid>
+        <Grid Grid.Row="1" Margin="20,20,20,5">
+            <Grid.ColumnDefinitions>
 
-                    <ColumnDefinition Width="140"/>
-                    <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="140"/>
+                <ColumnDefinition Width="1*"/>
 
-                </Grid.ColumnDefinitions>
+            </Grid.ColumnDefinitions>
 
-                <Border Style="{DynamicResource BorderStyle}" Margin="0, 13, 0, 0" Grid.Column="0" BorderThickness="2" CornerRadius="9">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="10"/>
-                            <RowDefinition Height="22"/>
-                            <RowDefinition Height="22"/>
-                            <RowDefinition Height="22"/>
-                            <RowDefinition Height="22"/>
-                            <RowDefinition Height="1*"/>
-                        </Grid.RowDefinitions>
+            <Border Style="{DynamicResource BorderStyle}" Grid.Column="0" BorderThickness="2" CornerRadius="3" Grid.RowSpan="2">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10"/>
+                        <RowDefinition Height="22"/>
+                        <RowDefinition Height="22"/>
+                        <RowDefinition Height="22"/>
+                        <RowDefinition Height="22"/>
+                        <RowDefinition Height="1*"/>
+                    </Grid.RowDefinitions>
 
-                        <Button Command="{Binding ShowLanguageCommand}" Style="{DynamicResource SettingsButton}" Grid.Row="1" Margin="0, 0, 0, 0">
-                            <Grid Width="135">
-                                <TextBlock Text="{DynamicResource language}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
-                            </Grid>
-                        </Button>
+                    <Button Command="{Binding ShowLanguageCommand}" Style="{DynamicResource WindowButtonStyle}" Grid.Row="1" Margin="0, 0, 0, 0" Background="Transparent">
+                        <Grid Width="135">
+                            <TextBlock Text="{DynamicResource language}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
+                        </Grid>
+                    </Button>
 
-                        <Button Command="{Binding ShowThemeCommand}" Style="{DynamicResource SettingsButton}" Grid.Row="2" Margin="0, 0, 0, 0">
-                            <Grid Width="135">
-                                <TextBlock Text="{DynamicResource colorTheme}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
-                            </Grid>
-                        </Button>
+                    <Button Command="{Binding ShowThemeCommand}" Style="{DynamicResource WindowButtonStyle}" Grid.Row="2" Margin="0, 0, 0, 0" Background="Transparent">
+                        <Grid Width="135">
+                            <TextBlock Text="{DynamicResource colorTheme}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
+                        </Grid>
+                    </Button>
 
-                        <Button Command="{Binding ShowFileCommand}" Style="{DynamicResource SettingsButton}" Grid.Row="3" Margin="0, 0, 0, 0">
-                            <Grid Width="135">
-                                <TextBlock Text="{DynamicResource fileSettings}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
-                            </Grid>
-                        </Button>
+                    <Button Command="{Binding ShowFileCommand}" Style="{DynamicResource WindowButtonStyle}" Grid.Row="3" Margin="0, 0, 0, 0" Background="Transparent">
+                        <Grid Width="135">
+                            <TextBlock Text="{DynamicResource fileSettings}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0"/>
+                        </Grid>
+                    </Button>
 
-                        <Button Command="{Binding ShowAboutCommand}" Style="{DynamicResource SettingsButton}" Grid.Row="4" Margin="0, 0, 0, 0">
-                            <Grid Width="135">
-                                <TextBlock Text="{DynamicResource about}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0" />
-                            </Grid>
-                        </Button>
+                    <Button Command="{Binding ShowAboutCommand}" Style="{DynamicResource WindowButtonStyle}" Grid.Row="4" Margin="0, 0, 0, 0" Background="Transparent">
+                        <Grid Width="135">
+                            <TextBlock Text="{DynamicResource about}" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="12" Margin="5, 0, 0, 0" />
+                        </Grid>
+                    </Button>
 
-                    </Grid>
-                </Border>
+                </Grid>
+            </Border>
 
-                <ContentControl x:Name="FrameContent"
+            <ContentControl x:Name="FrameContent"
                         Grid.Column="1"
-                        x:FieldModifier="public" />
-            </Grid>
+                        x:FieldModifier="public" Grid.RowSpan="2"/>
         </Grid>
     </Grid>
-</Window>
+</theme:RayeWindow>

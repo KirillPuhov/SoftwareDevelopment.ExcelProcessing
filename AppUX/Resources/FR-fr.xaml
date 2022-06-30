@@ -10,6 +10,7 @@
     <system:String x:Key="create">Créer</system:String>
     <system:String x:Key="close">Proche</system:String>
     <system:String x:Key="save">Enregistrer</system:String>
+    <system:String x:Key="report">Rapport</system:String>
     <system:String x:Key="column">Сolonne</system:String>
     <system:String x:Key="clear">Dégager</system:String>
     <system:String x:Key="back">Arrière</system:String>
@@ -28,6 +29,11 @@
     <system:String x:Key="developer">Développeur:</system:String>
     <system:String x:Key="ascending">Ascendant</system:String>
     <system:String x:Key="descending">Descendant</system:String>
+    <system:String x:Key="numberOfParticipants">Nombre de participants</system:String>
+    <system:String x:Key="averagePoint">Note moyenne</system:String>
+    <system:String x:Key="maxPoint">Note maximale</system:String>
+    <system:String x:Key="minPoint">Note minimale</system:String>
+    <system:String x:Key="statistic">Statistique</system:String>
     <system:String x:Key="gratitude">Merci d'avoir utilisé notre programme!</system:String>
 
 </ResourceDictionary>

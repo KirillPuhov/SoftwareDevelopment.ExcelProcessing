@@ -10,6 +10,7 @@
     <system:String x:Key="create">Создать</system:String>
     <system:String x:Key="close">Закрыть</system:String>
     <system:String x:Key="save">Сохранить</system:String>
+    <system:String x:Key="report">Отчёт</system:String>
     <system:String x:Key="column">Столбец</system:String>
     <system:String x:Key="clear">Очистить</system:String>
     <system:String x:Key="back">Назад</system:String>
@@ -28,6 +29,11 @@
     <system:String x:Key="developer">Разработчик:</system:String>
     <system:String x:Key="ascending">По возрастанию</system:String>
     <system:String x:Key="descending">По убыванию</system:String>
+    <system:String x:Key="numberOfParticipants">Число участников</system:String>
+    <system:String x:Key="averagePoint">Средний балл</system:String>
+    <system:String x:Key="maxPoint">Максимальный балл</system:String>
+    <system:String x:Key="minPoint">Минимальный балл</system:String>
+    <system:String x:Key="statistic">Статистика</system:String>
     <system:String x:Key="gratitude">Спасибо за использование нашей программы!</system:String>
 
 </ResourceDictionary>

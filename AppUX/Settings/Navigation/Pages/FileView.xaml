@@ -5,13 +5,15 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:AppUX.Settings.Navigation.Pages"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="450" d:DesignWidth="800"
+             SnapsToDevicePixels="True">
+    
     <Grid x:Name="FilePage" Grid.Column="1" Opacity="1" Visibility="Visible">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="1*"/>
             <ColumnDefinition Width="80"/>
         </Grid.ColumnDefinitions>
-        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,13,13,0" Header="{DynamicResource fileSettings}" VerticalAlignment="Top" Height="170" Padding="12">
+        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,0,13,0" Header="{DynamicResource fileSettings}" VerticalAlignment="Top" Height="170" Padding="12">
             <Grid VerticalAlignment="Center" Height="154" Margin="-180,-47,-180,-88">
 
                 <Grid.ColumnDefinitions>
@@ -20,48 +22,57 @@
                     <ColumnDefinition Width="1*"/>
                 </Grid.ColumnDefinitions>
 
-                <RadioButton Grid.Column="0" IsChecked="{Binding Path=ModeArray[0], Mode=TwoWay}" x:Name="ExcelFile" Style="{DynamicResource DefaultRadioButton}" Margin="10">
+                <RadioButton Grid.Column="0" IsChecked="{Binding Path=ModeArray[0], Mode=TwoWay}" x:Name="ExcelFile" Style="{DynamicResource DefaultRadioButton}" Margin="4">
                     <StackPanel>
                         <Viewbox Stretch="Uniform" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Height="35" Width="47">
                             <Canvas Height="110.037" Width="110.037">
                                 <Path Data="M57.55 0h7.425v10c12.513 0 25.025.025 37.537-.038 2.113.087 4.438-.062 6.275 1.2 1.287 1.85 1.138 4.2 1.225 6.325-.062 21.7-.037 43.388-.024 65.075-.062 3.638.337 7.35-.425 10.938-.5 2.6-3.625 2.662-5.713 2.75-12.95.037-25.912-.025-38.875 0v11.25h-7.763c-19.05-3.463-38.138-6.662-57.212-10V10.013C19.188 6.675 38.375 3.388 57.55 0z" Fill="Black" />
-                                <Path Data="M64.975 13.75h41.25V92.5h-41.25V85h10v-8.75h-10v-5h10V62.5h-10v-5h10v-8.75h-10v-5h10V35h-10v-5h10v-8.75h-10v-7.5z" Fill="#FFBDBDBD" />
+                                <Path Data="M64.975 13.75h41.25V92.5h-41.25V85h10v-8.75h-10v-5h10V62.5h-10v-5h10v-8.75h-10v-5h10V35h-10v-5h10v-8.75h-10v-7.5z" Fill="White" />
                                 <Path Data="M79.975 21.25h17.5V30h-17.5v-8.75z" Fill="Black" />
-                                <Path Data="M37.025 32.962c2.825-.2 5.663-.375 8.5-.512a2607.344 2607.344 0 0 1-10.087 20.487c3.438 7 6.949 13.95 10.399 20.95a716.28 716.28 0 0 1-9.024-.575c-2.125-5.213-4.713-10.25-6.238-15.7-1.699 5.075-4.125 9.862-6.074 14.838-2.738-.038-5.476-.15-8.213-.263C19.5 65.9 22.6 59.562 25.912 53.312c-2.812-6.438-5.9-12.75-8.8-19.15 2.75-.163 5.5-.325 8.25-.475 1.862 4.888 3.899 9.712 5.438 14.725 1.649-5.312 4.112-10.312 6.225-15.45z" Fill="#FFBDBDBD" />
+                                <Path Data="M37.025 32.962c2.825-.2 5.663-.375 8.5-.512a2607.344 2607.344 0 0 1-10.087 20.487c3.438 7 6.949 13.95 10.399 20.95a716.28 716.28 0 0 1-9.024-.575c-2.125-5.213-4.713-10.25-6.238-15.7-1.699 5.075-4.125 9.862-6.074 14.838-2.738-.038-5.476-.15-8.213-.263C19.5 65.9 22.6 59.562 25.912 53.312c-2.812-6.438-5.9-12.75-8.8-19.15 2.75-.163 5.5-.325 8.25-.475 1.862 4.888 3.899 9.712 5.438 14.725 1.649-5.312 4.112-10.312 6.225-15.45z" Fill="White" />
                                 <Path Data="M79.975 35h17.5v8.75h-17.5V35zM79.975 48.75h17.5v8.75h-17.5v-8.75zM79.975 62.5h17.5v8.75h-17.5V62.5zM79.975 76.25h17.5V85h-17.5v-8.75z" Fill="Black" />
                             </Canvas>
                         </Viewbox>
-                        <TextBlock Text="Excel file" Width="47"/>
+                        <TextBlock Text="Excel file" Width="47" Style="{DynamicResource TextBlockStyle}"/>
                     </StackPanel>
                 </RadioButton>
-                <RadioButton Grid.Column="1" IsChecked="{Binding Path=ModeArray[1], Mode=TwoWay}" x:Name="WordFile" Style="{DynamicResource DefaultRadioButton}" Margin="10">
+                <RadioButton Grid.Column="1" IsChecked="{Binding Path=ModeArray[1], Mode=TwoWay}" x:Name="WordFile" Style="{DynamicResource DefaultRadioButton}" Margin="4">
                     <StackPanel>
                         <Viewbox Stretch="Uniform" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" Width="49" Height="35">
                             <Canvas Height="110.031" Width="110.031">
                                 <Path Data="M57.505 0h7.475v10c13.375.075 26.738-.138 40.101.075 2.85-.288 5.087 1.925 4.825 4.775.212 24.625-.05 49.262.125 73.887-.125 2.525.25 5.325-1.213 7.562-1.825 1.3-4.188 1.138-6.312 1.237-12.514-.061-25.014-.036-37.526-.036v10h-7.812c-19.024-3.475-38.1-6.662-57.162-10-.013-29.162 0-58.325 0-87.475C19.167 6.675 38.343 3.413 57.506 0z" Fill="Black" />
-                                <Path Data="M64.98 13.75h41.25v80H64.98v-10h32.5v-5h-32.5V72.5h32.5v-5h-32.5v-6.25h32.5v-5h-32.5V50h32.5v-5h-32.5v-6.25h32.5v-5h-32.5V27.5h32.5v-5h-32.5v-8.75zM25.83 35.837c2.375-.137 4.75-.237 7.125-.362 1.662 8.438 3.362 16.862 5.162 25.262 1.413-8.675 2.976-17.325 4.487-25.987 2.5-.087 5-.225 7.488-.375-2.825 12.112-5.3 24.325-8.388 36.362-2.088 1.088-5.213-.05-7.688.125-1.663-8.274-3.6-16.5-5.088-24.812-1.462 8.075-3.362 16.075-5.037 24.101-2.4-.125-4.812-.275-7.226-.438-2.074-11-4.512-21.925-6.449-32.95 2.137-.1 4.287-.188 6.425-.263 1.287 7.962 2.75 15.888 3.875 23.862 1.765-8.174 3.564-16.349 5.314-24.525z" Fill="#FFBDBDBD" />
+                                <Path Data="M64.98 13.75h41.25v80H64.98v-10h32.5v-5h-32.5V72.5h32.5v-5h-32.5v-6.25h32.5v-5h-32.5V50h32.5v-5h-32.5v-6.25h32.5v-5h-32.5V27.5h32.5v-5h-32.5v-8.75zM25.83 35.837c2.375-.137 4.75-.237 7.125-.362 1.662 8.438 3.362 16.862 5.162 25.262 1.413-8.675 2.976-17.325 4.487-25.987 2.5-.087 5-.225 7.488-.375-2.825 12.112-5.3 24.325-8.388 36.362-2.088 1.088-5.213-.05-7.688.125-1.663-8.274-3.6-16.5-5.088-24.812-1.462 8.075-3.362 16.075-5.037 24.101-2.4-.125-4.812-.275-7.226-.438-2.074-11-4.512-21.925-6.449-32.95 2.137-.1 4.287-.188 6.425-.263 1.287 7.962 2.75 15.888 3.875 23.862 1.765-8.174 3.564-16.349 5.314-24.525z" Fill="White" />
                             </Canvas>
                         </Viewbox>
-                        <TextBlock Text="Word file" Width="49"/>
+                        <TextBlock Text="Word file" Width="49" Style="{DynamicResource TextBlockStyle}"/>
                     </StackPanel>
                 </RadioButton>
-                <RadioButton Grid.Column="2" IsChecked="{Binding Path=ModeArray[2], Mode=TwoWay}" x:Name="TextFile" Style="{DynamicResource DefaultRadioButton}" Margin="10">
+                <RadioButton Grid.Column="2" IsChecked="{Binding Path=ModeArray[2], Mode=TwoWay}" x:Name="TextFile" Style="{DynamicResource DefaultRadioButton}" Margin="4">
                     <StackPanel>
-                        <Viewbox Width="41" Height="35" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-                            <Canvas Height="330.853" Width="330.853">
-                                <Canvas Height="330.853" Width="330.853">
-                                    <Path Fill="Black" Data="M277.656,31.186h-32.882v-17.96C244.774,5.921,238.854,0,231.552,0c-7.309,0-13.223,5.927-13.223,13.226v17.96h-17.63   v-17.96C200.699,5.921,194.778,0,187.477,0c-7.314,0-13.223,5.927-13.223,13.226v17.96h-17.643v-17.96   c0-7.305-5.92-13.226-13.226-13.226c-7.305,0-13.219,5.927-13.219,13.226v17.96h-17.642v-17.96C112.524,5.921,106.609,0,99.299,0   c-7.305,0-13.22,5.927-13.22,13.226v17.96H53.182c-7.305,0-13.22,5.93-13.22,13.229V317.63c0,7.302,5.915,13.223,13.22,13.223   h224.486c7.302,0,13.223-5.927,13.223-13.223V44.421C290.891,37.116,284.97,31.186,277.656,31.186z M165.412,271.453H99.293   c-7.305,0-13.22-5.921-13.22-13.223s5.915-13.223,13.22-13.223h66.119c7.305,0,13.226,5.921,13.226,13.223   C178.644,265.532,172.723,271.453,165.412,271.453z M231.552,227.365H99.293c-7.305,0-13.22-5.92-13.22-13.222   s5.915-13.223,13.22-13.223h132.259c7.302,0,13.223,5.921,13.223,13.223S238.865,227.365,231.552,227.365z M231.552,183.291H99.293   c-7.305,0-13.22-5.921-13.22-13.235c0-7.292,5.915-13.216,13.22-13.216h132.259c7.302,0,13.223,5.93,13.223,13.216   C244.774,177.357,238.865,183.291,231.552,183.291z M231.552,139.2H99.293c-7.305,0-13.22-5.93-13.22-13.223   c0-7.305,5.915-13.226,13.22-13.226h132.259c7.302,0,13.223,5.927,13.223,13.226C244.774,133.271,238.865,139.2,231.552,139.2z" />
+                        <Viewbox Width="45" Height="45" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+                            <Canvas Height="798.545" Width="798.545">
+                                <Canvas Height="798.545" Width="798.545">
+                                    <Canvas>
+                                        <Path Fill="White" Data="M205.739,88.946c0,11.761-9.533,21.292-21.292,21.292h-79.805c-11.759,0-21.292-9.531-21.292-21.292l0,0    c0-11.758,9.533-21.292,21.292-21.292h79.804C196.206,67.655,205.739,77.188,205.739,88.946L205.739,88.946z" />
+                                        <Path Fill="White" Data="M205.739,192.428c0,11.761-9.533,21.292-21.292,21.292h-79.805c-11.759,0.001-21.292-9.531-21.292-21.292l0,0    c0-11.758,9.533-21.292,21.292-21.292h79.804C196.206,171.137,205.739,180.67,205.739,192.428L205.739,192.428z" />
+                                        <Path Fill="White" Data="M205.739,295.911c0,11.76-9.533,21.292-21.292,21.292h-79.805c-11.759,0-21.292-9.532-21.292-21.292l0,0    c0-11.759,9.533-21.292,21.292-21.292h79.804C196.206,274.619,205.739,284.152,205.739,295.911L205.739,295.911z" />
+                                        <Path Fill="White" Data="M205.739,399.393c0,11.759-9.533,21.292-21.292,21.292h-79.805c-11.759,0-21.292-9.533-21.292-21.292l0,0    c0-11.759,9.533-21.292,21.292-21.292h79.804C196.206,378.101,205.739,387.634,205.739,399.393L205.739,399.393z" />
+                                        <Path Fill="White" Data="M205.739,502.875c0,11.76-9.533,21.293-21.292,21.293h-79.805c-11.759,0-21.292-9.533-21.292-21.293l0,0    c0-11.758,9.533-21.291,21.292-21.291h79.804C196.206,481.584,205.739,491.117,205.739,502.875L205.739,502.875z" />
+                                        <Path Fill="White" Data="M205.739,606.355c0,11.762-9.533,21.295-21.292,21.295h-79.805c-11.759,0-21.292-9.533-21.292-21.295l0,0    c0-11.756,9.533-21.289,21.292-21.289h79.804C196.206,585.066,205.739,594.6,205.739,606.355L205.739,606.355z" />
+                                        <Path Fill="White" Data="M205.739,709.838c0,11.762-9.533,21.295-21.292,21.295h-79.805c-11.759,0-21.292-9.533-21.292-21.295l0,0    c0-11.758,9.533-21.291,21.292-21.291h79.804C196.206,688.547,205.739,698.08,205.739,709.838L205.739,709.838z" />
+                                        <Path Fill="Black" Data="M679.966,0H172.067c-19.457,0-35.231,15.772-35.231,35.229v22.77h48.591c17.025,0,30.825,13.801,30.825,30.825    c0,17.024-13.8,30.825-30.825,30.825h-48.591v41.832h48.591c17.025,0,30.825,13.801,30.825,30.825    c0,17.024-13.8,30.825-30.825,30.825h-48.591v41.834h48.591c17.025,0,30.825,13.8,30.825,30.825s-13.8,30.825-30.825,30.825    h-48.591v41.833h48.591c17.025,0,30.825,13.8,30.825,30.825c0,17.024-13.8,30.825-30.825,30.825h-48.591v41.834h48.591    c17.025,0,30.825,13.799,30.825,30.824c0,17.021-13.8,30.824-30.825,30.824h-48.591v41.832h48.591    c17.025,0,30.825,13.801,30.825,30.824c0,17.025-13.8,30.826-30.825,30.826h-48.591v41.834h48.591    c17.025,0,30.825,13.799,30.825,30.822s-13.8,30.826-30.825,30.826h-48.591v22.77c0,19.457,15.774,35.23,35.231,35.23h507.898    c19.457,0,35.229-15.773,35.229-35.23V35.229C715.195,15.772,699.423,0,679.966,0z M628.624,714.404H284.421    c-5.881,0-10.647-4.768-10.647-10.646s4.766-10.646,10.647-10.646h344.203c5.877,0,10.645,4.766,10.645,10.646    C639.269,709.637,634.501,714.404,628.624,714.404z M628.624,653.506H284.421c-5.881,0-10.647-4.768-10.647-10.646    c0-5.881,4.766-10.645,10.647-10.645h344.203c5.877,0,10.645,4.764,10.645,10.645    C639.268,648.738,634.501,653.506,628.624,653.506z M628.624,592.609H284.421c-5.881,0-10.647-4.768-10.647-10.646    s4.766-10.646,10.647-10.646h344.203c5.877,0,10.645,4.766,10.645,10.646S634.501,592.609,628.624,592.609z M628.624,531.713    H284.421c-5.881,0-10.647-4.77-10.647-10.646c0-5.881,4.766-10.645,10.647-10.645h344.203c5.877,0,10.645,4.764,10.645,10.645    C639.268,526.943,634.501,531.713,628.624,531.713z M628.624,470.816H284.421c-5.881,0-10.647-4.768-10.647-10.646    c0-5.881,4.766-10.646,10.647-10.646h344.203c5.877,0,10.645,4.766,10.645,10.646    C639.269,466.049,634.501,470.816,628.624,470.816z M628.624,409.918H284.421c-5.881,0-10.647-4.77-10.647-10.646    c0-5.88,4.766-10.646,10.647-10.646h344.203c5.877,0,10.645,4.767,10.645,10.646C639.268,405.15,634.501,409.918,628.624,409.918z     M628.624,349.021H284.421c-5.881,0-10.647-4.766-10.647-10.646s4.766-10.646,10.647-10.646h344.203    c5.877,0,10.645,4.766,10.645,10.646S634.501,349.021,628.624,349.021z M628.624,288.124H284.421    c-5.881,0-10.647-4.766-10.647-10.646s4.766-10.646,10.647-10.646h344.203c5.877,0,10.645,4.766,10.645,10.646    S634.501,288.124,628.624,288.124z M628.624,227.227H284.421c-5.881,0-10.647-4.767-10.647-10.646s4.766-10.646,10.647-10.646    h344.203c5.877,0,10.645,4.767,10.645,10.646C639.268,222.46,634.501,227.227,628.624,227.227z M628.624,166.33H284.421    c-5.881,0-10.647-4.767-10.647-10.646s4.766-10.646,10.647-10.646h344.203c5.877,0,10.645,4.767,10.645,10.646    C639.268,161.564,634.501,166.33,628.624,166.33z M628.624,105.433H284.421c-5.881,0-10.647-4.767-10.647-10.646    c0-5.88,4.766-10.646,10.647-10.646h344.203c5.877,0,10.645,4.766,10.645,10.646C639.268,100.667,634.501,105.433,628.624,105.433    z" />
+                                    </Canvas>
                                 </Canvas>
                             </Canvas>
                         </Viewbox>
-                        <TextBlock Text="Text file" Width="41"/>
+                        <TextBlock Text="Text file" Width="41" Style="{DynamicResource TextBlockStyle}"/>
                     </StackPanel>
                 </RadioButton>
 
             </Grid>
         </GroupBox>
 
-        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,200,13,0" Header="{StaticResource fileSettings}" VerticalAlignment="Top" Height="60" Padding="12">
+        <GroupBox Style="{DynamicResource GroupBoxStyle}" Margin="13,187,13,0" Header="{StaticResource fileSettings}" VerticalAlignment="Top" Height="60" Padding="12">
             <Grid VerticalAlignment="Center" Height="47" Margin="-180,-80,-180,-88">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="200"/>
@@ -70,13 +81,13 @@
 
                 <TextBlock Grid.Column="0" Text="{DynamicResource filePath}" VerticalAlignment="Center" HorizontalAlignment="Right" Margin="0,0,50,0"/>
                 <TextBox IsReadOnly="True" Text="{Binding Path=UserPath, Mode=TwoWay}" Width="350" Height="20" VerticalAlignment="Center" HorizontalAlignment="Left" Grid.ColumnSpan="2" Margin="191,14,0,13"/>
-                <Button Grid.Column="1" Command="{Binding OpenPathPickerCommand}" Style="{DynamicResource RoundedButton}" Content="{DynamicResource open}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="70" Margin="0,12,58,13"/>
+                <Button Grid.Column="1" Command="{Binding OpenPathPickerCommand}" Style="{DynamicResource RoundedButton}" Content="{DynamicResource open}" VerticalAlignment="Center" HorizontalAlignment="Right" Width="70" Margin="0,12,58,13" Background="Transparent"/>
             </Grid>
         </GroupBox>
 
         <StackPanel Margin="0, 13, 0, 0" Grid.Column="2">
-            <Button Command="{Binding ApplySettingsCommand}" x:Name="SetSettingsButton" Content="{DynamicResource apply}" Style="{DynamicResource RoundedButton}" Margin="0"/>
-            <Button Command="{Binding BackSettingsCommand}" x:Name="DefaultSettingsButton" Content="{DynamicResource back}" Style="{DynamicResource RoundedButton}" Margin="0, 7, 0, 0"/>
+            <Button Command="{Binding ApplySettingsCommand}" x:Name="SetSettingsButton" Content="{DynamicResource apply}" Style="{DynamicResource RoundedButton}" Margin="0" Background="Transparent"/>
+            <Button Command="{Binding BackSettingsCommand}" x:Name="DefaultSettingsButton" Content="{DynamicResource back}" Style="{DynamicResource RoundedButton}" Margin="0, 7, 0, 0" Background="Transparent"/>
         </StackPanel>
     </Grid>
 </UserControl>

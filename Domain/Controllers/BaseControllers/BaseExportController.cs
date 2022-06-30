@@ -12,9 +12,9 @@ namespace Domain.Controllers.BaseControllers
             _manager = manager;
         }
 
-        public bool SetTable(DataTable _table, string _fileName)
+        public bool SetTable(DataTable table, string fileName)
         {
-            return _manager.Export(_table, _fileName);
+            return _manager.Export(table, fileName);
         }
     }
 }
