@@ -14,7 +14,7 @@ ___
 ![](https://github.com/KirillPuhov/Excel_Processing/blob/main/Screenshots/Dark_2.jpg?raw=true)
 ![](https://github.com/KirillPuhov/Excel_Processing/blob/main/Screenshots/Dark_3.jpg?raw=true)
 ___
-#### ССылки
+#### Сcылки
 + https://github.com/xceedsoftware/DocX
 + https://github.com/EPPlusSoftware/EPPlus
 + https://github.com/ExcelDataReader/ExcelDataReader
