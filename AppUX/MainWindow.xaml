@@ -10,7 +10,8 @@
         mc:Ignorable="d"
         Language="RU-ru"
         MinHeight="600"
-        MinWidth="1080" 
+        MinWidth="1080"
+        Title="Excel Processing"
         FontFamily="Segoe UI" WindowStartupLocation="CenterScreen" IsHeaderTextVisible="False"
         SnapsToDevicePixels="True">
 
